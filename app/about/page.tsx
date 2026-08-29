@@ -1,53 +1,25 @@
 "use client";
 
 import Lenis from "lenis";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 
+const Page = () => {
+  const [imageHovered, setImageHovered] = useState(false);
 
-const page = () => {
-  useEffect(() => { 
+  useEffect(() => {
     const lenis = new Lenis();
-    function raf(time: any) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
   }, []);
 
-  const bookingUrl = "https://calendar.app.google/Ky91ZmnvcKwghU6D8";
   return (
     <div className="w-full scrollbar-hide bg-white">
-      <div className="fixed top-0 left-0 z-20 flex text-white w-full flex-col gap-2 p-4  font-medium tracking-tight mix-blend-difference sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex max-w-80 justify-between w-full">
-          <Link href="/" className="font-bold tracking-tighter  italic">
-            WISE
-          </Link>{" "}
-        </div>
-
-        <div className="flex gap-2   font-medium text-white mix-blend-difference">
-          <Link href="/" className="hover:underline">
-            Selected,
-          </Link>
-          <Link href="/work" className="hover:underline">
-            Work,
-          </Link>
-          <Link href="/about" className="hover:underline">
-            About,
-          </Link>
-          <Link href="/legal" className="hover:underline">
-            Legal,
-          </Link>
-          <Link
-            href={bookingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="cursor hover:underline"
-          >
-            Consult
-          </Link>
-        </div>
-      </div>
+      <Navbar />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full mt-40 p-6">
         <h1 className="text-5xl mb-4 justify- tracking-tighter text-[#999] font-semibold">
           About Wise Studios
@@ -132,13 +104,29 @@ const page = () => {
                   @wisee_
                 </a>
               </div>
-              <div className="w-full aspect-[4/5] bg-gray-200 mt-4">
+              <div
+                className="relative mt-4 aspect-[4/5] w-full overflow-hidden bg-gray-200"
+                onMouseEnter={() => setImageHovered(true)}
+                onMouseLeave={() => setImageHovered(false)}
+              >
                 <img
-                  src="/gylain-omer-SEHB67NK4Wg-unsplash.avif"
-                  alt="wisee"
-                  className="w-full h-full object-cover"
+                  src="/cosmos_43408050.avif"
+                  alt="Wise Studios"
+                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${imageHovered ? "opacity-0" : "opacity-100"}`}
+                />
+                <video
+                  src="/cosmos_1964321209.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${imageHovered ? "opacity-100" : "opacity-0"}`}
                 />
               </div>{" "}
+              <span className="text-[#999] flex flex-col gap-1 text-sm leading-4 mt-1 font-medium tracking-tight ">
+                Founders & Co-Founders:
+                 <span className="">Wandile Yanda Langa, Chloe Paige, Eleanor Hanna Hayes</span>
+              </span>
               <div className="flex w-full  mb-4 text-sm flex-col">
                 <span className="text-[#999] mt-4 font-medium tracking-tight ">
                   Location
@@ -290,4 +278,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

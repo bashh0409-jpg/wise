@@ -1,13 +1,11 @@
-// app/page.tsx
 "use client";
 
 import gsap from "gsap";
-import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import Navbar from "./components/Navbar";
 import SplitScramble, { SplitScrambleHandle } from "./components/SplitScramble";
 
 const defaultBackground = "/qyPgzVEHPMykvrKPpxbAMzv7Jk0.avif";
-const bookingUrl = "https://calendar.app.google/Ky91ZmnvcKwghU6D8";
 
 interface Project {
   title: string;
@@ -62,69 +60,58 @@ const projects: Project[] = [
 ];
 
 const ProjectCard = ({
-  title,
-  description,
-  category,
-  year,
-  image,
+  project,
   onHover,
   onLeave,
-}: Project & {
+}: {
+  project: Project;
   onHover: (image: string) => void;
   onLeave: () => void;
 }) => {
-  const projectRef = useRef<HTMLDivElement>(null);
-  const titleScrambleRef = useRef<SplitScrambleHandle>(null);
-  const descScrambleRef = useRef<SplitScrambleHandle>(null);
-  const catScrambleRef = useRef<SplitScrambleHandle>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<SplitScrambleHandle>(null);
+  const descriptionRef = useRef<SplitScrambleHandle>(null);
 
-  const animateProject = (color: string, stagger: number) => {
-    if (!projectRef.current) return;
-
-    titleScrambleRef.current?.scramble();
-    descScrambleRef.current?.scramble();
-    catScrambleRef.current?.scramble();
-
-    gsap.to(projectRef.current.children, {
-      color,
-      duration: 1,
-      stagger,
-      ease: "power2.inOut",
-      overwrite: "auto",
-    });
+  const animateText = (color: string) => {
+    titleRef.current?.scramble();
+    descriptionRef.current?.scramble();
+    if (cardRef.current) {
+      gsap.to(cardRef.current.children, {
+        color,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power2.inOut",
+        overwrite: "auto",
+      });
+    }
   };
 
   return (
     <div
-      ref={projectRef}
+      ref={cardRef}
       onMouseEnter={() => {
-        onHover(image);
-        animateProject("#6ff45d", 0.1);
+        onHover(project.image);
+        animateText("#6ff45d");
       }}
       onMouseLeave={() => {
         onLeave();
-        animateProject("#ffffff", 0.1);
+        animateText("#ffffff");
       }}
-      className=" flex w-full max-w-60 cursor-pointer flex-col p-2 text-sm font-medium leading-tight tracking-tight mix-blend-difference hover:mix-blend-normal sm:mx-0"
+      className="flex w-full max-w-60 cursor-pointer flex-col p-2 text-sm font-medium leading-tight tracking-tight mix-blend-difference hover:mix-blend-normal sm:mx-0"
     >
       <SplitScramble
-        ref={titleScrambleRef}
-        text={title}
+        ref={titleRef}
+        text={project.title}
         className="inline-block w-full"
       />
       <SplitScramble
-        ref={descScrambleRef}
-        text={description}
+        ref={descriptionRef}
+        text={project.description}
         className="mt-0.5 block w-full leading-4"
       />
       <span className="mt-2 flex flex-col">
-        <SplitScramble
-          ref={catScrambleRef}
-          text={category}
-          className="inline-block w-full"
-        />
-
-        <span className=" text-[14px]">{year}</span>
+        <span>{project.category}</span>
+        <span>{project.year}</span>
       </span>
     </div>
   );
@@ -132,59 +119,50 @@ const ProjectCard = ({
 
 const Page = () => {
   const [southAfricaTime, setSouthAfricaTime] = useState("");
-  const [navOpen, setNavOpen] = useState(false);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const revealRef = useRef<HTMLDivElement>(null);
-  // stack of background layers so rapid hovers crossfade correctly — each new
-  // target gets its own layer stacked on top; once it's fully opaque it fully
-  // covers everything beneath, so those can be dropped with no visible pop
   const [layers, setLayers] = useState<BackgroundLayer[]>([
     { id: 0, src: defaultBackground, visible: true },
   ]);
+  const headerRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
   const layerIdRef = useRef(0);
 
   const transitionToBackground = (image: string) => {
-    setLayers((prev) => {
-      const top = prev[prev.length - 1];
-      if (top.src === image) return prev; // already showing/animating to this image
+    setLayers((current) => {
+      if (current[current.length - 1].src === image) return current;
       layerIdRef.current += 1;
-      return [...prev, { id: layerIdRef.current, src: image, visible: false }];
+      return [
+        ...current,
+        { id: layerIdRef.current, src: image, visible: false },
+      ];
     });
   };
 
-  // flips the newest layer to visible on the next frame so the opacity change
-  // is picked up as a transition rather than an instant style on mount
+  const handleLayerTransitionEnd = (id: number) => {
+    setLayers((current) =>
+      current[current.length - 1].id === id
+        ? [current[current.length - 1]]
+        : current,
+    );
+  };
+
   useEffect(() => {
     const top = layers[layers.length - 1];
     if (top.visible) return;
-
-    const raf = window.requestAnimationFrame(() => {
-      setLayers((prev) =>
-        prev.map((layer) =>
+    const frame = requestAnimationFrame(() => {
+      setLayers((current) =>
+        current.map((layer) =>
           layer.id === top.id ? { ...layer, visible: true } : layer,
         ),
       );
     });
-
-    return () => window.cancelAnimationFrame(raf);
+    return () => cancelAnimationFrame(frame);
   }, [layers]);
-
-  // once a layer finishes fading in, it fully occludes every layer behind it —
-  // safe to drop those now; skip if a newer layer has since been queued on top
-  const handleLayerTransitionEnd = (id: number) => {
-    setLayers((prev) => {
-      const top = prev[prev.length - 1];
-      if (top.id !== id) return prev;
-      return [top];
-    });
-  };
 
   useEffect(() => {
     const intro = gsap.context(() => {
-      const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      timeline
+      gsap
+        .timeline({ defaults: { ease: "power3.out" } })
         .to(revealRef.current, {
           clipPath: "inset(0% 0% 100% 0%)",
           duration: 2,
@@ -212,29 +190,23 @@ const Page = () => {
             stagger: 0.1,
           },
         );
-
-      return () => timeline.kill();
     });
-
     return () => intro.revert();
   }, []);
 
   useEffect(() => {
-    const updateTime = () => {
+    const updateTime = () =>
       setSouthAfricaTime(
         new Intl.DateTimeFormat("en-US", {
           timeZone: "Africa/Johannesburg",
           hour: "numeric",
           minute: "2-digit",
-
+          second: "2-digit",
           hour12: true,
         }).format(new Date()),
       );
-    };
-
     updateTime();
-    const interval = window.setInterval(updateTime, 1_000);
-
+    const interval = window.setInterval(updateTime, 1000);
     return () => window.clearInterval(interval);
   }, []);
 
@@ -244,75 +216,31 @@ const Page = () => {
         ref={revealRef}
         className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-white text-black [clip-path:inset(0%_0%_0%_0%)]"
       >
-        <span className="text-sm font-bold  italic tracking-tight">WISE</span>
+        <span className="text-sm font-bold italic tracking-tight">WISE</span>
       </div>
       {layers.map((layer) => (
         <div
           key={layer.id}
           data-background
           onTransitionEnd={() => handleLayerTransitionEnd(layer.id)}
-          className={`absolute inset-0 bg-cover bg-top bg-no-repeat transition-opacity duration-600 ease-in-out ${
-            layer.visible ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 bg-cover bg-top bg-no-repeat transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
           style={{ backgroundImage: `url('${layer.src}')` }}
         />
       ))}
-      <div className="absolute inset-0 z-1 bg-black/30" />
-      <div
+      <div className="absolute inset-0 z-10 bg-black/30" />
+      <Navbar
         ref={headerRef}
-        className="relative z-20 flex w-full flex-col gap-2 p-4 font-medium tracking-tight text-white mix-blend-difference sm:flex-row sm:items-center sm:justify-between"
-      >
-        <div className="flex max-w-80 justify-between w-full">
-          <span className="font-bold tracking-tighter   italic">WISE</span>{" "}
-          <span>
-            <span className=""> {southAfricaTime}</span>
-          </span>
-        </div>
-
-        <button
-          type="button"
-          aria-expanded={navOpen}
-          aria-controls="main-navigation"
-          onClick={() => setNavOpen((open) => !open)}
-          className="self-end text-sm font-medium sm:hidden"
-        >
-          {navOpen ? "Close" : "Menu"}
-        </button>
-        <div
-          id="main-navigation"
-          
-          className={`${navOpen ? "flex" : "hidden"} absolute right-4 top-full z-30 flex-col gap-2 bg-black/60 p-4 font-medium text-white mix-blend-normal sm:static sm:flex sm:flex-row sm:gap-2 sm:bg-transparent sm:p-0 sm:mix-blend-difference`}
-        >
-          <Link href="/" className="cursor hover:underline">
-            Selected,
-          </Link>
-          <a href="/work" className="hover:underline cursor">
-            Work,
-          </a>
-          <a href="/about" className="hover:underline cursor">
-            About,
-          </a>
-          <a href="/legal" className="hover:underline cursor">
-            Legal,
-          </a>
-          <a
-            href={bookingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="cursor hover:underline"
-          >
-            Consult
-          </a>
-        </div>
-      </div>
+        className="relative"
+        currentTime={southAfricaTime}
+      />
       <div
         ref={projectsRef}
-        className="relative z-2 grid w-full grid-cols-1 gap-6 px-4 pb-8 pt-16 text-white sm:absolute sm:inset-0 sm:grid-cols-2 sm:content-center sm:gap-8 sm:py-20 md:grid-cols-3 lg:grid-cols-5 lg:gap-2"
+        className="relative z-20 grid w-full grid-cols-1 gap-6 px-4 pb-8 pt-16 text-white sm:absolute sm:inset-0 sm:grid-cols-2 sm:content-center sm:gap-8 sm:py-20 md:grid-cols-3 lg:grid-cols-5 lg:gap-2"
       >
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <ProjectCard
-            key={`${project.title}-${index}`}
-            {...project}
+            key={project.title}
+            project={project}
             onHover={transitionToBackground}
             onLeave={() => transitionToBackground(defaultBackground)}
           />

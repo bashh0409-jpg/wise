@@ -4,10 +4,9 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 
 import Lenis from "lenis";
+import Navbar from "../components/Navbar";
 
 const page = () => {
-  const bookingUrl = "https://calendar.app.google/Ky91ZmnvcKwghU6D8";
-
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time: any) {
@@ -19,36 +18,7 @@ const page = () => {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 z-20 flex text-white w-full flex-col gap-2 p-4  font-medium tracking-tight mix-blend-difference sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex max-w-80 justify-between w-full">
-          <Link href="/" className="font-bold tracking-tighter  italic">
-            WISE
-          </Link>{" "}
-        </div>
-
-        <div className="flex gap-2   font-medium text-white mix-blend-difference">
-          <Link href="/" className="hover:underline">
-            Selected,
-          </Link>
-          <Link href="/work" className="hover:underline">
-            Work,
-          </Link>
-          <Link href="/about" className="hover:underline">
-            About,
-          </Link>
-          <Link href="/legal" className="hover:underline">
-            Legal,
-          </Link>
-          <Link
-            href={bookingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="cursor hover:underline"
-          >
-            Consult
-          </Link>
-        </div>
-      </div>
+      <Navbar />
 
       <div className="grid  mt-20 grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <div>

@@ -5,9 +5,9 @@ import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Lenis from "lenis";
+import Navbar from "../components/Navbar";
 import WorkProjectCard, { WorkProject } from "../components/WorkProjectCard";
 
-const bookingUrl = "https://calendar.app.google/Ky91ZmnvcKwghU6D8";
 const statuses = [
   "All",
   "Idea",
@@ -18,6 +18,15 @@ const statuses = [
 type StatusFilter = (typeof statuses)[number];
 
 const projects: WorkProject[] = [
+  {
+    title: "Don't look away",
+    description: "An independent publishing system for slow travel stories",
+    category: "Editorial & Publishing",
+    video: "/cosmos_1964321209.mp4",
+    alt: "Field Notes project",
+    status: "In progress",
+    year: "2024",
+  },
   {
     title: "Moya House",
     description: "A warm editorial platform for contemporary African interiors",
@@ -37,6 +46,16 @@ const projects: WorkProject[] = [
     year: "2025",
   },
   {
+    title: "911 concept",
+    description: "A digital-first identity for a fast-growing skincare label",
+    category: "Sport & cars",
+    image: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
+    video: "/cosmos_1100859839.mp4",
+    alt: "Luma project",
+    status: "Complete",
+    year: "2025",
+  },
+  {
     title: "Aster",
     description: "A playful commerce experience for a modern flower studio",
     category: "Retail & E-commerce",
@@ -45,16 +64,16 @@ const projects: WorkProject[] = [
     status: "Idea",
     year: "2024",
   },
-
   {
-    title: "Field Notes",
-    description: "An independent publishing system for slow travel stories",
-    category: "Editorial & Publishing",
-    image: "/zane-winter-zTMkVbpzFd8-unsplash.avif",
-    alt: "Field Notes project",
+    title: "still tv",
+    description: "A visual identity for a studio making everyday objects",
+    category: "Product & Design",
+    video: "/cosmos_941935399.mp4",
+    alt: "Still Life project",
     status: "In progress",
-    year: "2024",
+    year: "2025",
   },
+
   {
     title: "Just Do It",
     description: "A global campaign built around movement and possibility",
@@ -64,74 +83,40 @@ const projects: WorkProject[] = [
     status: "Complete",
     year: "2025",
   },
+
   {
     title: "Onda",
     description: "A fresh visual language for a coastal food journal",
     category: "Food & Hospitality",
-    image: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
+    video: "/SM9hHChcDvagce2VKpv41kGI3g.mp4",
     alt: "Onda project",
     status: "Coming soon",
     year: "2024",
   },
   {
-    title: "Northbound",
+    title: "911 gt3rs",
     description: "Repositioning a heritage outerwear brand for a new audience",
-    category: "Fashion & Retail",
-    image: "/gylain-omer-SEHB67NK4Wg-unsplash.avif",
+    category: "Sport & cars",
+    image: "/user.avif",
+    video: "/cosmos_436860355.mp4",
     alt: "Northbound project",
     status: "Complete",
     year: "2025",
   },
   {
-    title: "Cinder",
+    title: "nokta",
     description: "A campaign-led rebrand for a contemporary fashion label",
     category: "Fashion & Beauty",
-    image: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
+    image: "/gylain-omer-SEHB67NK4Wg-unsplash.avif",
     alt: "Cinder project",
     status: "Complete",
     year: "2024",
   },
   {
-    title: "Echelon",
-    description: "Reframing a consulting firm for a new generation of clients",
-    category: "Arts & Culture",
-    image: "/qyPgzVEHPMykvrKPpxbAMzv7Jk0.avif",
-    alt: "Echelon project",
-    status: "In progress",
-    year: "2025",
-  },
-  {
-    title: "Brim",
-    description: "A product-focused identity for a direct-to-consumer startup",
-    category: "Technology",
-    image: "/K1z8mV8TAFVjZBpOYWvGpV130Kw.avif",
-    alt: "Brim project",
-    status: "Idea",
-    year: "2023",
-  },
-  {
-    title: "Pillar",
-    description: "A cohesive brand system for a scaling technology company",
-    category: "Technology & Strategy",
-    image: "/jadon-johnson-wdJGAQYf4G0-unsplash.avif",
-    alt: "Pillar project",
-    status: "Coming soon",
-    year: "2023",
-  },
-  {
-    title: "Morrow",
-    description: "A calm digital home for a contemporary wellness practice",
-    category: "Health & Wellness",
-    image: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
-    alt: "Morrow project",
-    status: "Complete",
-    year: "2024",
-  },
-  {
-    title: "Still Life",
+    title: "Life",
     description: "A visual identity for a studio making everyday objects",
     category: "Product & Design",
-    image: "/zane-winter-zTMkVbpzFd8-unsplash.avif",
+    video: "/4YRBCPlg5XRd9JNVEthezMkdmQ.mp4",
     alt: "Still Life project",
     status: "In progress",
     year: "2025",
@@ -140,7 +125,7 @@ const projects: WorkProject[] = [
     title: "Good Form",
     description: "A fresh platform for independent makers and creative work",
     category: "Community & Culture",
-    image: "/gylain-omer-SEHB67NK4Wg-unsplash.avif",
+    image: "/cosmos_1219871018.avif",
     alt: "Good Form project",
     status: "Idea",
     year: "2024",
@@ -149,7 +134,7 @@ const projects: WorkProject[] = [
     title: "Afterglow",
     description: "An atmospheric campaign for a new independent film festival",
     category: "Film & Entertainment",
-    image: "/qyPgzVEHPMykvrKPpxbAMzv7Jk0.avif",
+    image: "/premium_photo-1786925954093-59bcd63365ed.avif",
     alt: "Afterglow project",
     status: "Complete",
     year: "2023",
@@ -159,7 +144,7 @@ const projects: WorkProject[] = [
     description:
       "A collaborative identity for a sustainable textile collective",
     category: "Sustainability & Craft",
-    image: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
+    image: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
     alt: "Common Thread project",
     status: "Coming soon",
     year: "2026",
@@ -168,7 +153,7 @@ const projects: WorkProject[] = [
     title: "Orbit",
     description: "A bold launch system for a next-generation creative tool",
     category: "Technology & Innovation",
-    image: "/K1z8mV8TAFVjZBpOYWvGpV130Kw.avif",
+    image: "/user.avif",
     alt: "Orbit project",
     status: "In progress",
     year: "2026",
@@ -178,7 +163,7 @@ const projects: WorkProject[] = [
     description:
       "A hospitality experience shaped by local food and slow living",
     category: "Travel & Hospitality",
-    image: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
+    image: "/cosmos_945699821.avif",
     alt: "Casa Norte project",
     status: "Idea",
     year: "2025",
@@ -187,7 +172,7 @@ const projects: WorkProject[] = [
     title: "Open Water",
     description: "A campaign platform for a community-led ocean initiative",
     category: "Environment & Sport",
-    image: "/jadon-johnson-wdJGAQYf4G0-unsplash.avif",
+    video: "/cosmos_420240096.mp4",
     alt: "Open Water project",
     status: "Complete",
     year: "2024",
@@ -196,7 +181,7 @@ const projects: WorkProject[] = [
     title: "Noma Radio",
     description: "A distinct sonic world for an independent broadcast platform",
     category: "Music & Events",
-    image: "/zane-winter-zTMkVbpzFd8-unsplash.avif",
+    video: "/cosmos_69270702.mp4",
     alt: "Noma Radio project",
     status: "Coming soon",
     year: "2026",
@@ -209,7 +194,7 @@ const Page = () => {
   const [activeProject, setActiveProject] = useState<WorkProject | null>(null);
   const [previewPosition, setPreviewPosition] = useState({ top: 0, left: 0 });
   const previewRef = useRef<HTMLDivElement>(null);
-  const previewImageRef = useRef<HTMLImageElement>(null);
+  const previewMediaRef = useRef<HTMLElement>(null);
 
   const handleProjectHover = (project: WorkProject, element: HTMLElement) => {
     const bounds = element.getBoundingClientRect();
@@ -248,7 +233,7 @@ const Page = () => {
       },
     );
     gsap.fromTo(
-      previewImageRef.current,
+      previewMediaRef.current,
       { scale: 1.12, opacity: 0, filter: "blur(10px)" },
       {
         scale: 1,
@@ -278,33 +263,7 @@ const Page = () => {
 
   return (
     <div>
-      <nav className="fixed left-0 top-0 z-20 flex w-full flex-col gap-2 p-4 font-medium tracking-tight mix-blend-difference sm:flex-row sm:items-center sm:justify-between">
-        <Link href="/" className="font-bold italic tracking-tighter text-white">
-          WISE
-        </Link>
-        <div className="flex gap-2 text-white">
-          <Link href="/" className="hover:underline">
-            Selected,
-          </Link>
-          <Link href="/work" className="hover:underline">
-            Work,
-          </Link>
-          <Link href="/about" className="hover:underline">
-            About,
-          </Link>
-          <Link href="/legal" className="hover:underline">
-            Legal,
-          </Link>
-          <Link
-            href={bookingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="hover:underline"
-          >
-            Consult
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className="mt-50 flex flex-col p-4">
         <button
@@ -424,15 +383,36 @@ const Page = () => {
           >
             {activeProject && (
               <div ref={previewRef} className="absolute inset-0">
-                <Image
-                  key={activeProject.title}
-                  ref={previewImageRef}
-                  src={activeProject.image}
-                  alt={activeProject.alt}
-                  fill
-                  sizes="20vw"
-                  className="object-cover  mix-blend-difference"
-                />
+                {activeProject.video ? (
+                  <video
+                    key={activeProject.video}
+                    ref={(element) => {
+                      previewMediaRef.current = element;
+                    }}
+                    src={activeProject.video}
+                    poster={activeProject.image}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-label={activeProject.alt}
+                    className="h-full w-full object-cover mix-blend-difference"
+                  />
+                ) : activeProject.image ? (
+                  <Image
+                    key={activeProject.image}
+                    ref={(element) => {
+                      previewMediaRef.current = element;
+                    }}
+                    src={activeProject.image}
+                    alt={activeProject.alt}
+                    fill
+                    sizes="20vw"
+                    className="object-cover mix-blend-difference"
+                  />
+                ) : (
+                  <div className="h-full w-full bg-black/5" />
+                )}
               </div>
             )}
           </div>
