@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import SplitScramble, { SplitScrambleHandle } from "./components/SplitScramble";
 
 const defaultBackground = "/qyPgzVEHPMykvrKPpxbAMzv7Jk0.avif";
+const SLAT_COUNT = 8;
 
 interface Project {
   title: string;
@@ -97,21 +98,23 @@ const ProjectCard = ({
         onLeave();
         animateText("#ffffff");
       }}
-      className="flex w-full max-w-60 cursor-pointer flex-col p-2 text-sm font-medium leading-tight tracking-tight mix-blend-difference hover:mix-blend-normal sm:mx-0"
+      className="flex w-full max-w-60  cursor-pointer flex-col p-2 text-sm font-medium leading-tight tracking-tight mix-blend-difference hover:mix-blend-normal sm:mx-0"
     >
       <SplitScramble
         ref={titleRef}
         text={project.title}
-        className="inline-block w-full"
+        className="inline-block font-semibold tracking-tighter w-full"
       />
       <SplitScramble
         ref={descriptionRef}
         text={project.description}
-        className="mt-0.5 block w-full leading-4"
+        className="mt-0.5 font-semibold tracking-tighter  block w-full leading-4"
       />
       <span className="mt-2 flex flex-col">
-        <span>{project.category}</span>
-        <span>{project.year}</span>
+        <span className=" font-semibold tracking-tighter ">
+          {project.category}
+        </span>
+        <span className="text-xs tracking-tighter">{project.year}</span>
       </span>
     </div>
   );
@@ -125,6 +128,7 @@ const Page = () => {
   const headerRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
+  const introTextRef = useRef<HTMLSpanElement>(null);
   const layerIdRef = useRef(0);
 
   const transitionToBackground = (image: string) => {
@@ -161,75 +165,106 @@ const Page = () => {
 
   useEffect(() => {
     const intro = gsap.context(() => {
-      gsap
-        .timeline({ defaults: { ease: "power3.out" } })
-        .to(revealRef.current, {
-          clipPath: "inset(0% 0% 100% 0%)",
-          duration: 2,
-          ease: "power4.inOut",
-        })
+      const slats = gsap.utils.toArray<HTMLDivElement>("[data-slat]");
+      // Origin alternates per slat so neighbouring strips retract in opposite
+      // directions (top vs bottom) — avoids the "single guillotine" look of a
+      // uniform wipe and reads as a more deliberate, editorial motion.
+      slats.forEach((slat, i) => {
+        gsap.set(slat, { transformOrigin: i % 2 === 0 ? "top" : "bottom" });
+      });
+
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.fromTo(
+        introTextRef.current,
+        { opacity: 0, letterSpacing: "0.4em", filter: "blur(6px)" },
+        {
+          opacity: 1,
+          letterSpacing: "-0.05em",
+          filter: "blur(0px)",
+          duration: 0.6,
+          ease: "power4.out",
+        },
+      )
+        .to(
+          introTextRef.current,
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          "+=0.3",
+        )
+        // Slats retract from the center outward — the wave direction gives the
+        // reveal a focal point instead of a flat left-to-right sweep.
+        .to(
+          slats,
+          {
+            scaleY: 0,
+            duration: 0.9,
+            ease: "power4.inOut",
+            stagger: { each: 0.07, from: "center" },
+          },
+          "-=0.1",
+        )
         .fromTo(
           "[data-background]",
-          { scale: 1.98, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" },
+          { scale: 1.12, filter: "blur(8px)" },
+          { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "power2.out" },
+          "-=0.9",
         )
         .fromTo(
           headerRef.current,
-          { y: -18, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          "-=1",
+          { y: -16, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          "-=0.8",
         )
         .fromTo(
           projectsRef.current?.children ?? [],
-          { y: 24, opacity: 0, filter: "blur(8px)" },
+          { y: 28, opacity: 0, filter: "blur(8px)" },
           {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
             duration: 0.9,
-            stagger: 0.1,
+            stagger: 0.08,
           },
+          "-=0.45",
         );
     });
+
     return () => intro.revert();
   }, []);
 
-  useEffect(() => {
-    const updateTime = () =>
-      setSouthAfricaTime(
-        new Intl.DateTimeFormat("en-US", {
-          timeZone: "Africa/Johannesburg",
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        }).format(new Date()),
-      );
-    updateTime();
-    const interval = window.setInterval(updateTime, 1000);
-    return () => window.clearInterval(interval);
-  }, []);
-
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative bg-white min-h-screen overflow-hidden">
       <div
         ref={revealRef}
-        className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-white text-black [clip-path:inset(0%_0%_0%_0%)]"
+        className="pointer-events-none fixed inset-0 z-50 flex"
       >
-        <span className="text-sm font-bold italic tracking-tight">WISE</span>
+        {Array.from({ length: SLAT_COUNT }).map((_, i) => (
+          <div
+            key={i}
+            data-slat
+            className="h-full flex-1 bg-white will-change-transform"
+          />
+        ))}
       </div>
+      <span
+        ref={introTextRef}
+        className="pointer-events-none flex flex-col uppercas fixed inset-0 z-[60] flex items-center justify-center text-lg font-semibold tracking-tight text-black"
+      >
+       
+        Wise 
+        <span></span>
+      </span>
       {layers.map((layer) => (
         <div
           key={layer.id}
           data-background
           onTransitionEnd={() => handleLayerTransitionEnd(layer.id)}
           className={`absolute inset-0 bg-cover bg-top bg-no-repeat transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
-              style={{ backgroundImage: `url('${layer.src}')` }}
-              
+          style={{ backgroundImage: `url('${layer.src}')` }}
         />
       ))}
-          <div className="absolute inset-0 z-10 bg-black/30" />
-         
+      <div className="absolute inset-0 z-10 bg-black/30" />
+
       <Navbar
         ref={headerRef}
         className="relative z-50"
@@ -247,8 +282,7 @@ const Page = () => {
             onLeave={() => transitionToBackground(defaultBackground)}
           />
         ))}
-          </div>
-         
+      </div>
     </div>
   );
 };

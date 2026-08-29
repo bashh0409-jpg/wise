@@ -115,7 +115,7 @@ const WorkProjectCard = (project: WorkProject) => {
         {category}
       </span>
 
-      <span className="text-right font-semibold tracking-tighter text-[#999]">
+      <span className="text-right font-semibold  tracking-tighter text-[#999]">
         {year}
       </span>
     </article>
