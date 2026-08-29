@@ -28,7 +28,7 @@ const Page = () => {
           <h1 className="text-6xl hidden mb-4 ml-15 tracking-tighter text-[#999] font-semibold">
             Information
           </h1>
-          <p className="font-semibold leading-tight justify- text-lg tracking-tighter">
+          <p className="font-semibold leading-tight  justify- text-lg tracking-tighter">
             <span className="opacity-0">______</span>
             <span className="text-4xl">W</span>ise Studios is a software
             engineering studio founded by Wandile Yanda Langa, focused on

@@ -16,7 +16,7 @@ const links = [
   { href: "/", label: "Selected," },
   { href: "/work", label: "Work," },
   { href: "/about", label: "About," },
-  { href: "/legal", label: "Legal" },
+  { href: "/legal", label: "Legal," },
 ];
 
 const Navbar = forwardRef<

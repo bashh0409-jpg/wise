@@ -55,7 +55,7 @@ const projects: Project[] = [
     description: "An independent publishing system for slow travel stories",
     category: "Editorial & Publishing",
     year: "2024",
-    image: "/zane-winter-zTMkVbpzFd8-unsplash.avif",
+    image: "/cosmos_945699821.avif",
   },
 ];
 
@@ -224,13 +224,15 @@ const Page = () => {
           data-background
           onTransitionEnd={() => handleLayerTransitionEnd(layer.id)}
           className={`absolute inset-0 bg-cover bg-top bg-no-repeat transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url('${layer.src}')` }}
+              style={{ backgroundImage: `url('${layer.src}')` }}
+              
         />
       ))}
-      <div className="absolute inset-0 z-10 bg-black/30" />
+          <div className="absolute inset-0 z-10 bg-black/30" />
+         
       <Navbar
         ref={headerRef}
-        className="relative"
+        className="relative z-100"
         currentTime={southAfricaTime}
       />
       <div
