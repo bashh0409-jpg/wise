@@ -68,7 +68,7 @@ const Navbar = forwardRef<
           hour: "numeric",
           minute: "2-digit",
           second: "2-digit",
-          hour12: false,
+          hour12: true  ,
         }).format(new Date()),
       );
     };
@@ -164,7 +164,7 @@ const Navbar = forwardRef<
       <aside
         ref={asideRef}
         aria-hidden={!sidebarOpen}
-        className={`fixed right-0 top-0 z-40 flex h-full w-full flex-col bg-white p-6 text-black sm:hidden ${sidebarOpen ? "" : "pointer-events-none"}`}
+        className={`fixed right-0 top-0 z-100 flex h-full w-full flex-col bg-white p-6 text-black sm:hidden ${sidebarOpen ? "" : "pointer-events-none"}`}
       >
         <div className="flex items-center justify-between">
           <span className="font-bold italic tracking-tighter">WISE</span>
@@ -209,7 +209,7 @@ const Navbar = forwardRef<
             <span>Software engrineer </span>
             <span className="-mt-1">South Africa, PMB </span>
           </div>
-          <span>©2026 Wise</span>
+          <span>©2026 Wise Studios</span>
         </div>
       </aside>
     </>

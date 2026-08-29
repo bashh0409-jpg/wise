@@ -232,7 +232,7 @@ const Page = () => {
          
       <Navbar
         ref={headerRef}
-        className="relative z-100"
+        className="relative z-50"
         currentTime={southAfricaTime}
       />
       <div
@@ -247,7 +247,8 @@ const Page = () => {
             onLeave={() => transitionToBackground(defaultBackground)}
           />
         ))}
-      </div>
+          </div>
+         
     </div>
   );
 };
