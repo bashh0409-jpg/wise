@@ -2,71 +2,44 @@
 
 import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
+import MuxVideo from "@mux/mux-video-react";
 import Navbar from "./components/Navbar";
 import SplitScramble, { SplitScrambleHandle } from "./components/SplitScramble";
+import { projects, type ProjectDetail } from "@/lib/projects";
 
-const defaultBackground = "/qyPgzVEHPMykvrKPpxbAMzv7Jk0.avif";
-const SLAT_COUNT = 8;
-
-interface Project {
-  title: string;
-  description: string;
-  category: string;
-  year: string;
-  image: string;
-}
+const SLAT_COUNT = 1;
+const featuredProjectIds = [
+  "Just_Do_It",
+  "Redline",
+  "Hearth",
+  "Honorable",
+  "echelon",
+] as const;
+const featuredProjects = featuredProjectIds.flatMap((id) => {
+  const project = projects.find((item) => item.id === id);
+  return project ? [project] : [];
+});
+const defaultProject =
+  featuredProjects.find((project) => project.id === "Just_Do_It") ??
+  featuredProjects[0];
+const featuredVideos = featuredProjects.filter(
+  (project): project is ProjectDetail & { video: string } => Boolean(project.video),
+);
 
 interface BackgroundLayer {
   id: number;
-  src: string;
+  image?: string;
+  playbackId?: string;
   visible: boolean;
 }
-
-const projects: Project[] = [
-  {
-    title: "Kinder",
-    description: "Building a lifestyle brand rooted in community and culture",
-    category: "Education",
-    year: "2026",
-    image: "/K1z8mV8TAFVjZBpOYWvGpV130Kw.avif",
-  },
-  {
-    title: "Luma",
-    description: "A digital-first identity for a fast-growing skincare label",
-    category: "Fashion & Beauty",
-    year: "2025",
-    image: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
-  },
-  {
-    title: "Just Do It",
-    description: "Nike's first-ever global campaign for the Paralympics",
-    category: "Sports & Fitness",
-    year: "2025",
-    image: "/jadon-johnson-wdJGAQYf4G0-unsplash.avif",
-  },
-  {
-    title: "Aster",
-    description: "A playful commerce experience for a modern flower studio",
-    category: "Retail & E-commerce",
-    year: "2024",
-    image: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
-  },
-  {
-    title: "Field Notes",
-    description: "An independent publishing system for slow travel stories",
-    category: "Editorial & Publishing",
-    year: "2024",
-    image: "/cosmos_945699821.avif",
-  },
-];
 
 const ProjectCard = ({
   project,
   onHover,
   onLeave,
 }: {
-  project: Project;
-  onHover: (image: string) => void;
+  project: ProjectDetail;
+  onHover: (project: ProjectDetail) => void;
   onLeave: () => void;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -91,7 +64,7 @@ const ProjectCard = ({
     <div
       ref={cardRef}
       onMouseEnter={() => {
-        onHover(project.image);
+        onHover(project);
         animateText("#6ff45d");
       }}
       onMouseLeave={() => {
@@ -123,7 +96,12 @@ const ProjectCard = ({
 const Page = () => {
   const [southAfricaTime, setSouthAfricaTime] = useState("");
   const [layers, setLayers] = useState<BackgroundLayer[]>([
-    { id: 0, src: defaultBackground, visible: true },
+    {
+      id: 0,
+      image: defaultProject.image,
+      playbackId: defaultProject.video,
+      visible: true,
+    },
   ]);
   const headerRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -131,13 +109,25 @@ const Page = () => {
   const introTextRef = useRef<HTMLSpanElement>(null);
   const layerIdRef = useRef(0);
 
-  const transitionToBackground = (image: string) => {
+  const transitionToBackground = (project: ProjectDetail) => {
     setLayers((current) => {
-      if (current[current.length - 1].src === image) return current;
+      const activeLayer = current[current.length - 1];
+      if (
+        activeLayer.image === project.image &&
+        activeLayer.playbackId === project.video
+      ) {
+        return current;
+      }
+
       layerIdRef.current += 1;
       return [
         ...current,
-        { id: layerIdRef.current, src: image, visible: false },
+        {
+          id: layerIdRef.current,
+          image: project.image,
+          playbackId: project.video,
+          visible: false,
+        },
       ];
     });
   };
@@ -235,6 +225,27 @@ const Page = () => {
   return (
     <div className="relative bg-white min-h-screen overflow-hidden">
       <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 opacity-0"
+      >
+        {featuredVideos.map((project) => (
+          <MuxVideo
+            key={project.id}
+            playbackId={project.video}
+            poster={project.image}
+            autoPlay
+            muted
+            loop
+            playsInline
+            metadata={{ video_id: project.id, video_title: project.title }}
+            preload="auto"
+            streamType="on-demand"
+            capRenditionToPlayerSize={false}
+            className="h-full w-full object-cover"
+          />
+        ))}
+      </div>
+      <div
         ref={revealRef}
         className="pointer-events-none fixed inset-0 z-50 flex"
       >
@@ -259,9 +270,29 @@ const Page = () => {
           key={layer.id}
           data-background
           onTransitionEnd={() => handleLayerTransitionEnd(layer.id)}
-          className={`absolute inset-0 bg-cover bg-top bg-no-repeat transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url('${layer.src}')` }}
-        />
+          className={`absolute inset-0 overflow-hidden transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
+        >
+          {layer.playbackId ? (
+            <MuxVideo
+              playbackId={layer.playbackId}
+              poster={layer.image}
+              autoPlay
+              muted
+              loop
+              playsInline
+              metadata={{ video_id: layer.id.toString(), video_title: "Home background" }}
+              preload="auto"
+              streamType="on-demand"
+              capRenditionToPlayerSize
+              className="h-full w-full object-cover object-top"
+            />
+          ) : (
+            <div
+              className="h-full w-full bg-cover bg-top bg-no-repeat"
+              style={{ backgroundImage: `url('${layer.image}')` }}
+            />
+          )}
+        </div>
       ))}
       <div className="absolute inset-0 z-10 bg-black/30" />
 
@@ -274,12 +305,12 @@ const Page = () => {
         ref={projectsRef}
         className="relative z-20 grid w-full grid-cols-1 gap-6 px-4 pb-8 pt-16 text-white sm:absolute sm:inset-0 sm:grid-cols-2 sm:content-center sm:gap-8 sm:py-20 md:grid-cols-3 lg:grid-cols-5 lg:gap-2"
       >
-        {projects.map((project) => (
+        {featuredProjects.map((project) => (
           <ProjectCard
             key={project.title}
             project={project}
             onHover={transitionToBackground}
-            onLeave={() => transitionToBackground(defaultBackground)}
+            onLeave={() => transitionToBackground(defaultProject)}
           />
         ))}
       </div>

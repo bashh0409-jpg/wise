@@ -1,55 +1,92 @@
+import React from "react";
 
-import React from 'react'
-import Link from 'next/link';
+interface ContactLink {
+  label: string;
+  value: string;
+  href: string;
+}
+
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
+const BUSINESS_CONTACTS: ContactLink[] = [
+  { label: "Business", value: "hello@wisestudios.com", href: "mailto:hello@wisestudios.com" },
+  { label: "Careers", value: "careers@wisestudios.com", href: "mailto:careers@wisestudios.com" },
+];
+
+const GENERAL_CONTACTS: ContactLink[] = [
+  { label: "Tel", value: "+27 (81) 590-9191", href: "tel:+27815909191" },
+  { label: "Mail", value: "info@wisestudios.com", href: "mailto:info@wisestudios.com" },
+  { label: "Instagram", value: "@wisee_", href: "https://www.instagram.com/wisestudios/" },
+];
+
+// Replace with real profile URLs — originals all pointed at /legal, which was clearly a placeholder bug.
+const SOCIALS: SocialLink[] = [
+  { label: "Instagram", href: "https://www.instagram.com/wisestudios/" },
+  { label: "X", href: "https://x.com/wisee_" },
+  { label: "Threads", href: "https://www.threads.net/@wisee_" },
+];
+
+const ContactColumn = ({ title, contacts }: { title: string; contacts: ContactLink[] }) => (
+  <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
+    <span className="text-[#999] font-semibold">{title}</span>
+    <ul className="flex w-full flex-col justify-between">
+      {contacts.map((contact) => (
+        <li key={contact.label} className="font-semibold">
+          <a href={contact.href} className="flex w-full justify-between hover:underline">
+            <span className="text-[#999]">{contact.label}: </span>
+            {contact.value}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 const Footer = () => {
   return (
-    <div>
-      <footer className="mt-32 grid w-full grid-cols-1 gap-10 p-4 text-sm font-medium md:grid-cols-2">
-        <div className="flex flex-col gap-2 sm:flex-row sm:gap-6">
-          <span className="text-[#999] tracking-tight">General enquiries</span>
-          <div className="flex flex-col tracking-tight">
-            <a href="mailto:hello@wisestudios.com" className="hover:underline">
-              <span className="text-[#999]">Mail: </span>hello@wisestudios.com
-            </a>
-            <a href="tel:+27815909191" className="hover:underline">
-              <span className="text-[#999]">Tel: </span>+27 (81) 590-9191
-            </a>
+    <footer className="mt-32 grid w-full grid-cols-1 gap-10 p-4 text-sm font-medium md:grid-cols-2">
+      <div className="flex flex-col gap-2 sm:gap-6 md:flex-col">
+        <ContactColumn title="Business Enquiries" contacts={BUSINESS_CONTACTS} />
+        <ContactColumn title="General Enquiries" contacts={GENERAL_CONTACTS} />
 
-            
-             <a href="https://www.instagram.com/wisestudios/"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:underline"
-            >
-              <span className="text-[#999]">Instagram: </span>@wisee_
-            </a>
-
-            
-            <a  href="https://maps.app.goo.gl/3eLcwYFzWXMgxSZ66"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:underline"
-            >
-              <span className="text-[#999]">Location: </span>Woodlands, 3201
-            </a>
-          </div>
+        <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
+          <span />
+          <span className="font-semibold text-[#999]">Made by Wise Studios</span>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-1 md:items-end md:text-right">
-          <span>Legal notice</span>
-          <span className="text-[#999]">
-            ©2026 Wise Studios. All rights reserved
-          </span>
-          <div className="flex gap-4">
-            <Link href="/legal" className="text-[#999] hover:text-black">
-              Privacy Policy
-            </Link>
-          </div>
+      <div className="grid grid-cols-2 items-end tracking-tighter md:grid-cols-3">
+        <span className="font-semibold text-[#999]">Socials</span>
+        <ul className="flex w-full gap-4">
+          {SOCIALS.map((social) => (
+            <li key={social.label}>
+              
+             <a   href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-blue-500 font-semibold hover:underline"
+              >
+                {social.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="grid grid-cols-2 items-end tracking-tighter md:grid-cols-3">
+        <span className="font-semibold text-[#999]">© All rights reserved</span>
+        <div className="flex w-full flex-col justify-between">
+          <a href="/legal" className="flex w-full justify-between font-semibold hover:text-blue-500 hover:underline">
+            Legal Notice
+          </a>
+          <span className="text-[#999]">CVR No. 12345678</span>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
-}
+};
 
-export default Footer
+export default Footer;

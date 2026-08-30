@@ -2,12 +2,15 @@
 
 import Lenis from "lenis";
 import { useEffect, useState } from "react";
+import MuxVideo from "@mux/mux-video-react";
 import Navbar from "../components/Navbar";
 import { ResumeDetails } from "../components/ResumeDetails";
 import Footer from "../components/Footer";
+import { getMuxPlaybackId } from "../mux";
 
 const Page = () => {
   const [imageHovered, setImageHovered] = useState(false);
+  const aboutVideo = getMuxPlaybackId("about");
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -75,7 +78,7 @@ const Page = () => {
       <span className="text-[#999]">Email:</span>
       
        <a href="mailto:hello@wisestudios.com"
-        className="text-black hover:underline"
+        className="text-black  hover:underline"
       >
         hello@wisestudios.com
       </a>
@@ -104,22 +107,28 @@ const Page = () => {
       onMouseLeave={() => setImageHovered(false)}
     >
       <img
-        src="/cosmos_43408050.avif"
+        src="/images/user.avif"
         alt="Wise Studios"
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
-          imageHovered ? "opacity-0" : "opacity-100"
+          imageHovered && aboutVideo ? "opacity-0" : "opacity-100"
         }`}
       />
-      <video
-        src="/cosmos_1964321209.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
-          imageHovered ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      {aboutVideo && (
+        <MuxVideo
+          playbackId={aboutVideo}
+          autoPlay
+          muted={!imageHovered}
+          loop
+          playsInline
+          metadata={{ video_id: "about", video_title: "Wise Studios" }}
+          preload="metadata"
+          streamType="on-demand"
+          capRenditionToPlayerSize
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
+            imageHovered ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
     </div>
 
     <span className="mt-1 flex flex-col items-end justify-end gap-1 font-mono text-xs font-medium uppercase leading-4 tracking-tight text-[#999]">

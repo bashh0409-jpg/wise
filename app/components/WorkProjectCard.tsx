@@ -1,12 +1,18 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import MuxVideo from "@mux/mux-video-react";
 
 export interface WorkProject {
+  id: string;
   title: string;
   description: string;
   category: string;
   status: string;
+  client: string;
   year: string;
+  visit: string;
+  deliverables: string;
   image?: string;
   video?: string;
   alt: string;
@@ -18,12 +24,15 @@ export interface WorkProject {
 
 const WorkProjectCard = (project: WorkProject) => {
   const {
+    id,
     title,
     description,
     category,
+    status,
     year,
     image,
     video,
+    visit,
     alt,
     index,
     onHover,
@@ -31,13 +40,9 @@ const WorkProjectCard = (project: WorkProject) => {
     view = "list",
   } = project;
 
-  if (view === "grid") {
-    return (
-      <article
-        onMouseEnter={(event) => onHover?.(project, event.currentTarget)}
-        onMouseLeave={onLeave}
-        className="group cursor-pointer mb-4"
-      >
+  const cardContent =
+    view === "grid" ? (
+      <>
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-black/5">
           {/* Centered loading indicator over the media area */}
           <span
@@ -57,14 +62,32 @@ const WorkProjectCard = (project: WorkProject) => {
           </span>
 
           {video ? (
-            <video
-              src={video}
+            <div>
+              <span className="absolute transition-colors duration-400 left-2 hover:bg-black/20 font-mono z-100 top-2 bg-black/10 px-1 tracking-tight font-semibold uppercase text-[11px] text-white backdrop-blur-md">
+                {status}
+              </span>
+            </div>
+          ) : image ? (
+            <span className="absolute transition-colors duration-400 left-2 hover:bg-black/20 font-mono z-100 top-2 bg-black/10 px-1 tracking-tight font-semibold uppercase text-[11px] text-white backdrop-blur-md">
+              {status}
+            </span>
+          ) : (
+            <div className="h-full w-full bg-black/5" aria-label={alt} />
+          )}
+
+          {video ? (
+            <MuxVideo
+              playbackId={video}
               poster={image}
               autoPlay
               muted
               loop
               playsInline
               aria-label={alt}
+              metadata={{ video_id: id, video_title: title }}
+              preload="metadata"
+              streamType="on-demand"
+              capRenditionToPlayerSize
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-101"
             />
           ) : image ? (
@@ -81,44 +104,66 @@ const WorkProjectCard = (project: WorkProject) => {
           )}
         </div>
 
-        <div className="mt-2 flex flex-col text-xs uppercase tracking-tight">
+        <div className="mt-4 flex flex-col leading-3 text-xs uppercase tracking-tight">
           <span className="font-semibold">{title}</span>
           <span className="font-semibold text-black/40">{category}</span>
         </div>
-      </article>
+      </>
+    ) : (
+      <>
+        <span className="font-semibold tracking-tight text-black">
+          {index ?? ""}
+        </span>
+
+        <span className="flex w-full flex-col font-semibold tracking-tighter">
+          {title}
+
+          <span className="mt-1 block w-full text-[#999] sm:hidden">
+            {description} - <span className="ml-1">[ {category} ]</span>
+          </span>
+        </span>
+
+        <span className="hidden font-semibold tracking-tighter text-[#999] sm:block">
+          {description}
+        </span>
+
+        <span className="hidden font-semibold tracking-tight text-[#999] sm:block">
+          {category}
+        </span>
+
+        <span className="text-right font-semibold  tracking-tighter text-[#999]">
+          {year}
+        </span>
+      </>
+    );
+
+  if (view === "grid") {
+    return (
+      <Link
+        href={`/work/project/${id}`}
+        className="group mb-4 block no-underline"
+      >
+        <article
+          onMouseEnter={(event) => onHover?.(project, event.currentTarget)}
+          onMouseLeave={onLeave}
+          className="cursor-pointer"
+        >
+          {cardContent}
+        </article>
+      </Link>
     );
   }
 
   return (
-    <article
-      onMouseEnter={(event) => onHover?.(project, event.currentTarget)}
-      onMouseLeave={onLeave}
-      className="group grid grid-cols-[2rem_minmax(0,1fr)_4rem] items-center gap-3 border-t border-black/10 py-6 text-sm transition-colors hover:bg-black/[0.03] sm:grid-cols-[2rem_minmax(7rem,1fr)_minmax(12rem,2fr)_minmax(8rem,1fr)_4rem] sm:gap-6"
-    >
-      <span className="font-semibold tracking-tight text-black">
-        {index ?? ""}
-      </span>
-
-      <span className="flex w-full flex-col font-semibold tracking-tighter">
-        {title}
-
-        <span className="mt-1 block w-full text-[#999] sm:hidden">
-          {description} - <span className="ml-1">[ {category} ]</span>
-        </span>
-      </span>
-
-      <span className="hidden font-semibold tracking-tighter text-[#999] sm:block">
-        {description}
-      </span>
-
-      <span className="hidden font-semibold tracking-tight text-[#999] sm:block">
-        {category}
-      </span>
-
-      <span className="text-right font-semibold  tracking-tighter text-[#999]">
-        {year}
-      </span>
-    </article>
+    <Link href={`/work/project/${id}`} className="group block no-underline">
+      <article
+        onMouseEnter={(event) => onHover?.(project, event.currentTarget)}
+        onMouseLeave={onLeave}
+        className="grid grid-cols-[2rem_minmax(0,1fr)_4rem] items-center gap-3 border-t border-black/10 py-6 text-sm transition-colors duration-400 hover:bg-black/[0.03] sm:grid-cols-[2rem_minmax(7rem,1fr)_minmax(12rem,2fr)_minmax(8rem,1fr)_4rem] sm:gap-6"
+      >
+        {cardContent}
+      </article>
+    </Link>
   );
 };
 
