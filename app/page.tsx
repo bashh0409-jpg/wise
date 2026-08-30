@@ -23,7 +23,8 @@ const defaultProject =
   featuredProjects.find((project) => project.id === "Just_Do_It") ??
   featuredProjects[0];
 const featuredVideos = featuredProjects.filter(
-  (project): project is ProjectDetail & { video: string } => Boolean(project.video),
+  (project): project is ProjectDetail & { video: string } =>
+    Boolean(project.video),
 );
 
 interface BackgroundLayer {
@@ -261,8 +262,7 @@ const Page = () => {
         ref={introTextRef}
         className="pointer-events-none flex flex-col uppercas fixed inset-0 z-[60] flex items-center justify-center text-lg font-semibold tracking-tight text-black"
       >
-       
-        Wise 
+        <img src="/images/user.avif" alt="loader" className="w-40" />
         <span></span>
       </span>
       {layers.map((layer) => (
@@ -280,7 +280,10 @@ const Page = () => {
               muted
               loop
               playsInline
-              metadata={{ video_id: layer.id.toString(), video_title: "Home background" }}
+              metadata={{
+                video_id: layer.id.toString(),
+                video_title: "Home background",
+              }}
               preload="auto"
               streamType="on-demand"
               capRenditionToPlayerSize

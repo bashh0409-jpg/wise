@@ -8,6 +8,7 @@ import MuxVideo from "@mux/mux-video-react";
 import Navbar from "../components/Navbar";
 import WorkProjectCard, { WorkProject } from "../components/WorkProjectCard";
 import Footer from "../components/Footer";
+import { getMuxThumbnailUrl } from "../mux";
 import { projects } from "../../lib/projects";
 
 const statuses = [
@@ -221,7 +222,7 @@ const Page = () => {
                       previewMediaRef.current = element ?? null;
                     }}
                     playbackId={activeProject.video}
-                    poster={activeProject.image}
+                    poster={getMuxThumbnailUrl(activeProject.video)}
                     autoPlay
                     muted
                     loop

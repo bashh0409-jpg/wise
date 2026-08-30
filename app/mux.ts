@@ -14,10 +14,14 @@ const muxPlaybackIds = {
   eWay: "Bwzio9gVqGNO6c6s2egmYVQ9gEcCnzwqQGi02bGLuMT8", // cosmos_103760289.mp4
   porsce911: "PdPgy8OSMapOvsbmYxVStlPIFoCouwJxU502Ds02Q00gOg", // cosmos_1100859839.mp4
   nothingEar3: "vIj5TQAwfXCZQ8FOFysAflDJT02x1D1KOqyo01HhSfYHM", // cosmos_104589580.mp4
-  kunye: "plaEGelqa801M00lmnitrxRUKMANLR79a1cdaTLydZP1M", // images/cosmos_1067584247 (1).mp4
+  kunye: "23LP1J7aN8HBokubJ200xvh8txfvPXbQEm3aT5xRJr02I", // images/cosmos_1067584247 (1).mp4
 } as const;
 
 export type MuxVideoKey = keyof typeof muxPlaybackIds;
 
 export const getMuxPlaybackId = (key: MuxVideoKey) =>
   muxPlaybackIds[key] || undefined;
+
+/** Lightweight still image generated from a public Mux video. */
+export const getMuxThumbnailUrl = (playbackId: string) =>
+  `https://image.mux.com/${playbackId}/thumbnail.webp?time=0&width=640`;

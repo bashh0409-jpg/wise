@@ -69,7 +69,7 @@ const Page = () => {
           type="button"
           aria-label={isMuted ? "Unmute sound" : "Mute sound"}
           onClick={() => setIsMuted((current) => !current)}
-          className="absolute  right-4 top-4 z-50 cursor-pointer rounded-full bg-white p-1 transition-all duration-500"
+          className="absolute  right-4 top-4  cursor-pointer rounded-full bg-white p-1 transition-all duration-500"
         >
           {isMuted ? (
             <svg
@@ -100,7 +100,7 @@ const Page = () => {
           type="button"
           aria-label={isMuted ? "Unmute sound" : "Mute sound"}
           onClick={() => setIsMuted((current) => !current)}
-          className="absolute right-4 top-4 z-50 cursor-pointer rounded-full bg-white p-1 transition-all duration-500"
+          className="absolute right-4 top-4  cursor-pointer rounded-full bg-white p-1 transition-all duration-500"
         >
           {isMuted ? (
             <svg
@@ -370,8 +370,8 @@ const Page = () => {
         aria-label="Close story"
         className={`fixed right-1/2 cursor-pointer z-50 rounded-full p-1 bg-white transition-all duration-500 ${
           overlayOpen
-            ? "opacity-100 pointer-events-auto bottom-[calc(90vh+16px)]"
-            : "opacity-0 pointer-events-none bottom-[calc(90vh+16px)]"
+            ? "opacity-100 pointer-events-auto bottom-[calc(90vh+10px)]"
+            : "opacity-0 pointer-events-none bottom-[calc(90vh+10px)]"
         }`}
       >
         <svg

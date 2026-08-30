@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MuxVideo from "@mux/mux-video-react";
+import { getMuxThumbnailUrl } from "../mux";
 
 export interface WorkProject {
   id: string;
@@ -39,6 +40,15 @@ const WorkProjectCard = (project: WorkProject) => {
     onLeave,
     view = "list",
   } = project;
+  const videoPoster = video ? getMuxThumbnailUrl(video) : undefined;
+
+  const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
+    onHover?.(project, event.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    onLeave?.();
+  };
 
   const cardContent =
     view === "grid" ? (
@@ -63,12 +73,12 @@ const WorkProjectCard = (project: WorkProject) => {
 
           {video ? (
             <div>
-              <span className="absolute transition-colors duration-400 left-2 hover:bg-black/20 font-mono z-100 top-2 bg-black/10 px-1 tracking-tight font-semibold uppercase text-[11px] text-white backdrop-blur-md">
+              <span className="absolute transition-colors duration-400 left-2 hover:bg-black/20 font-mono z-1 top-2 bg-black/10 px-1 tracking-tight font-semibold uppercase text-[11px] text-white backdrop-blur-md">
                 {status}
               </span>
             </div>
           ) : image ? (
-            <span className="absolute transition-colors duration-400 left-2 hover:bg-black/20 font-mono z-100 top-2 bg-black/10 px-1 tracking-tight font-semibold uppercase text-[11px] text-white backdrop-blur-md">
+            <span className="absolute transition-colors duration-400 left-2 hover:bg-black/20 font-mono z-1 top-2 bg-black/10 px-1 tracking-tight font-semibold uppercase text-[11px] text-white backdrop-blur-md">
               {status}
             </span>
           ) : (
@@ -78,7 +88,7 @@ const WorkProjectCard = (project: WorkProject) => {
           {video ? (
             <MuxVideo
               playbackId={video}
-              poster={image}
+              poster={videoPoster}
               autoPlay
               muted
               loop
@@ -144,8 +154,8 @@ const WorkProjectCard = (project: WorkProject) => {
         className="group mb-4 block no-underline"
       >
         <article
-          onMouseEnter={(event) => onHover?.(project, event.currentTarget)}
-          onMouseLeave={onLeave}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           className="cursor-pointer"
         >
           {cardContent}
@@ -155,10 +165,13 @@ const WorkProjectCard = (project: WorkProject) => {
   }
 
   return (
-    <Link href={`/work/project/${id}`} className="group block no-underline">
+    <Link
+      href={`/work/project/${id}`}
+      className="group block no-underline"
+    >
       <article
-        onMouseEnter={(event) => onHover?.(project, event.currentTarget)}
-        onMouseLeave={onLeave}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className="grid grid-cols-[2rem_minmax(0,1fr)_4rem] items-center gap-3 border-t border-black/10 py-6 text-sm transition-colors duration-400 hover:bg-black/[0.03] sm:grid-cols-[2rem_minmax(7rem,1fr)_minmax(12rem,2fr)_minmax(8rem,1fr)_4rem] sm:gap-6"
       >
         {cardContent}
