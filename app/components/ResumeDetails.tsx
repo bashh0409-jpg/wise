@@ -1,23 +1,26 @@
 const clients = [
-  "Northern Lights Gallery (NY-10001)",
-  "Horizon Thread Foundation (SI-Dolina)",
-  "Paper Moon Bureau (LU-Eichenfels)",
-  "Parallel Echo Gallery (IS-Sandvik)",
-  "Iron Bloom House (PL-Mostowo)",
-  "White Quarry Studio (RO-Valeasca)",
-  "Neon Harbour Society (US-Alder City)",
-  "Wolf & Sparrow Office (GB-Ashbourne)",
-  "Nova Terrain Center (ES-Sierra Azul)",
+  "Tallow (TL-101-WISE)",
+  "Rhode (RD-102-WISE)",
+  "Vanta (VN-103-WISE)",
+  "Kunye (KE-104-WISE)",
+  "Melabody (MB-105-WISE)",
+  "Honorable (HB-106-WISE)",
+  "Redline (RL-107-WISE)",
+  "Just Do It (JDI-145-WISE))",
+  "Ilia (IL-108-WISE)",
+  "eWay (EW-109-WISE)",
+  "UNNA (UN-110-WISE)",
+  "Dua (DUA-111-WISE)",
 ];
 
 const talks = [
-  "Aurora Institute, Copenhagen",
-  "Northbridge Creative Arts, Chicago",
-  "Visionary Forum, Lisbon",
-  "Design Futures Collective, Vancouver",
-  "Westlake School of Arts, Boston",
+  "Porsche, Germany",
+  "Vanta, Cape Town",
+  "Visionary Forum, Johannesburg",
+  "Design Futures Collective, Sandton",
+  "WestSchool of Arts, Durban",
   "Harbor Institute of Design, Providence",
-  "MakeLab, Austin",
+  "MakeLab, Durban",
   "Signal Festival",
 ];
 
@@ -29,24 +32,24 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    years: "2025-2026",
-    role: "Creative Director / Director",
-    company: "Northline Creative, Berlin",
+    years: "2025-20__",
+    role: "Founder, Software Engineer",
+    company: "Wise Studios, Woodlands",
   },
   {
     years: "2024-2025",
-    role: "Creative Director / Director",
-    company: "Northline Creative, Berlin",
+    role: "Software Engineer",
+    company: "Wish, Sandton",
   },
   {
     years: "2023-2024",
-    role: "Creative Director / Director",
-    company: "Northline Creative, Berlin",
+    role: "Software Engineer",
+    company: "Evalasting, Cape Town",
   },
   {
     years: "2021-2023",
-    role: "Creative Director / Director",
-    company: "Northline Creative, Berlin",
+    role: "Software Engineer",
+    company: "Bash (Foshini), Sandton",
   },
 ];
 

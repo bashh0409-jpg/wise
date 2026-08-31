@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import CookieConsent from "./components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-
 export const metadata: Metadata = {
   title: "Wise Studios",
   description:
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
     title: "Wise Studios",
     description:
       "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
-    url: "https://wisestudios.com",
+    url: "https://wisestudios.fyi",
     siteName: "Wise Studios",
     type: "website",
   },
@@ -36,7 +35,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  
   return (
     <html
       lang="en"
@@ -44,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <CookieConsent />
         <SpeedInsights />
       </body>
     </html>

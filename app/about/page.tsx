@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "About | Wise Studios",
     description:
       "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
-    url: "https://wisestudios.com/about",
+    url: "https://wisestudios.fyi/about",
     siteName: "Wise Studios",
     type: "website",
   },

@@ -180,7 +180,7 @@ const Page = () => {
                 }}
                 className={
                   statusFilter === status
-                    ? "text-black cursor-pointer"
+                    ? "text-black uppercase cursor-pointer"
                     : "hover:text-black cursor-pointer "
                 }
               >

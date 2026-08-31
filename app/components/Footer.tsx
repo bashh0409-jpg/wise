@@ -12,30 +12,55 @@ interface SocialLink {
 }
 
 const BUSINESS_CONTACTS: ContactLink[] = [
-  { label: "Business", value: "hello@wisestudios.com", href: "mailto:hello@wisestudios.com" },
-  { label: "Careers", value: "careers@wisestudios.com", href: "mailto:careers@wisestudios.com" },
+  {
+    label: "Business",
+    value: "hello@wisestudios.fyi",
+    href: "mailto:hello@wisestudios.fyi",
+  },
+  {
+    label: "Careers",
+    value: "careers@wisestudios.fyi",
+    href: "mailto:careers@wisestudios.fyi",
+  },
 ];
 
 const GENERAL_CONTACTS: ContactLink[] = [
   { label: "Tel", value: "+27 (81) 590-9191", href: "tel:+27815909191" },
-  { label: "Mail", value: "info@wisestudios.com", href: "mailto:info@wisestudios.com" },
-  { label: "Instagram", value: "@wisee_", href: "https://www.instagram.com/wisestudios/" },
+  {
+    label: "Mail",
+    value: "info@wisestudios.fyi",
+    href: "mailto:info@wisestudios.fyi",
+  },
+  {
+    label: "Instagram",
+    value: "@wisee_",
+    href: "https://www.instagram.com/wisestudios/",
+  },
 ];
 
-// Replace with real profile URLs — originals all pointed at /legal, which was clearly a placeholder bug.
+
 const SOCIALS: SocialLink[] = [
   { label: "Instagram", href: "https://www.instagram.com/wisestudios/" },
   { label: "X", href: "https://x.com/wisee_" },
   { label: "Threads", href: "https://www.threads.net/@wisee_" },
 ];
 
-const ContactColumn = ({ title, contacts }: { title: string; contacts: ContactLink[] }) => (
+const ContactColumn = ({
+  title,
+  contacts,
+}: {
+  title: string;
+  contacts: ContactLink[];
+}) => (
   <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
     <span className="text-[#999] font-semibold">{title}</span>
     <ul className="flex w-full flex-col justify-between">
       {contacts.map((contact) => (
         <li key={contact.label} className="font-semibold">
-          <a href={contact.href} className="flex w-full justify-between hover:underline">
+          <a
+            href={contact.href}
+            className="flex w-full justify-between hover:underline"
+          >
             <span className="text-[#999]">{contact.label}: </span>
             {contact.value}
           </a>
@@ -49,12 +74,15 @@ const Footer = () => {
   return (
     <footer className="mt-32 grid w-full grid-cols-1 gap-10 p-4 text-sm font-medium md:grid-cols-2">
       <div className="flex flex-col gap-2 sm:gap-6 md:flex-col">
-        <ContactColumn title="Business Enquiries" contacts={BUSINESS_CONTACTS} />
+        <ContactColumn
+          title="Business Enquiries"
+          contacts={BUSINESS_CONTACTS}
+        />
         <ContactColumn title="General Enquiries" contacts={GENERAL_CONTACTS} />
 
         <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
           <span />
-          <span className="font-semibold text-[#999]">Made by Wise Studios</span>
+          <span className="font-semibold text-[#999">Made by Wise Studios</span>
         </div>
       </div>
 
@@ -63,8 +91,8 @@ const Footer = () => {
         <ul className="flex w-full gap-4">
           {SOCIALS.map((social) => (
             <li key={social.label}>
-              
-             <a   href={social.href}
+              <a
+                href={social.href}
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-blue-500 font-semibold hover:underline"
@@ -77,12 +105,19 @@ const Footer = () => {
       </div>
 
       <div className="grid grid-cols-2 items-end tracking-tighter md:grid-cols-3">
-        <span className="font-semibold text-[#999]">© All rights reserved</span>
+        <span className="font-semibold text-[#999]">
+          © Wisee. All rights reserved
+        </span>
         <div className="flex w-full flex-col justify-between">
-          <a href="/legal" className="flex w-full justify-between font-semibold hover:text-blue-500 hover:underline">
+          <a
+            href="/legal"
+            className="flex w-full justify-between font-semibold hover:text-blue-500 hover:underline"
+          >
             Legal Notice
           </a>
-          <span className="text-[#999]">CVR No. 12345678</span>
+          <span className="text-[#999]">
+            (Pty) Ltd Reg No: 2026/______/07
+          </span>
         </div>
       </div>
     </footer>

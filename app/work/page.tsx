@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import type { Metadata } from "next";
-import WorkPage from "./WorkPage"
+import WorkPage from "./WorkPage";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Work | Wise Studios",
     description: "Selected client work and case studies from Wise Studios.",
-    url: "https://wisestudios.com/work",
+    url: "https://wisestudios.fyi/work",
     siteName: "Wise Studios",
     type: "website",
   },
@@ -21,8 +21,10 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div><WorkPage/></div>
-  )
-}
+    <div>
+      <WorkPage />
+    </div>
+  );
+};
 
-export default page
+export default page;

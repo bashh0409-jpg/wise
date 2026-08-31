@@ -168,7 +168,7 @@ const Page = () => {
               : "opacity-0 translate-y-2 pointer-events-none"
           }`}
         >
-          Read the story
+          Read more
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="18px"
@@ -235,11 +235,52 @@ const Page = () => {
 
           <div
             ref={firstRectRef}
-            className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2"
+            className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2"
           >
             {firstMedia}
           </div>
-          <div className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2">
+          <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt={project.alt}
+                fill
+                sizes="(min-width: 768px) 75vw, 100vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="h-full w-full bg-black/6" />
+            )}
+          </div>
+          <div className="grid gap-2 grid-cols-2">
+            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  fill
+                  sizes="(min-width: 768px) 35vw, 100vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-black/10" />
+              )}
+            </div>
+            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  fill
+                  sizes="(min-width: 768px) 35vw, 100vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-black/10" />
+              )}
+            </div>
+          </div>
+          <div className="relative w-full overflow-hidden bg-black/6 aspect-video mb-2">
             {project.image ? (
               <Image
                 src={project.image}
@@ -253,7 +294,7 @@ const Page = () => {
             )}
           </div>
           <div className="grid gap-2 grid-cols-2">
-            <div className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2">
+            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
               {project.image ? (
                 <Image
                   src={project.image}
@@ -266,7 +307,7 @@ const Page = () => {
                 <div className="h-full w-full bg-black/10" />
               )}
             </div>
-            <div className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2">
+            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
               {project.image ? (
                 <Image
                   src={project.image}
@@ -276,48 +317,7 @@ const Page = () => {
                   className="object-cover"
                 />
               ) : (
-                <div className="h-full w-full bg-black/10" />
-              )}
-            </div>
-          </div>
-          <div className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2">
-            {project.image ? (
-              <Image
-                src={project.image}
-                alt={project.alt}
-                fill
-                sizes="(min-width: 768px) 75vw, 100vw"
-                className="object-cover"
-              />
-            ) : (
-              <div className="h-full w-full bg-black/10" />
-            )}
-          </div>
-          <div className="grid gap-2 grid-cols-2">
-            <div className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="(min-width: 768px) 35vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="h-full w-full bg-black/10" />
-              )}
-            </div>
-            <div className="relative w-full overflow-hidden border border-black/15 bg-black/10 aspect-video mb-2">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="(min-width: 768px) 35vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="h-full w-full bg-black/10" />
+                <div className="h-full w-full bg-black/6" />
               )}
             </div>
           </div>
@@ -391,8 +391,15 @@ const Page = () => {
         }`}
       >
         <div className="min-h-full flex items-center justify-center px-4 md:px-10 py-10 pb-20">
-          <div className="max-w-xl mt-20 gap-4 flex flex-col ">
+          <div className="max-w-xl mt-10 gap-4 flex flex-col ">
             <div>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter font-semibold max-w-full md:max-w-[60%] leading-tight md:leading-12 mb-2">
+              {project.title}
+              </h1>
+             
+              <span className=" flex flex-col  text-sm mb-4 font-medium tracking-tight ">
+                {project.category}
+              </span>
               <span className="text-[#999] flex flex-col  text-sm mb-2 font-medium tracking-tight ">
                 The Challenge
               </span>
@@ -400,15 +407,13 @@ const Page = () => {
                 <span className="font-medium text-sm leading-4 mb-1 tracking-tight ">
                   {project.description}
                 </span>
-                <span className="font-medium text-sm leading-4 mb-1 tracking-tight ">
+                <span className="font-medium text-sm leading-4 mb-2 tracking-tight ">
                   This project was built for {project.client} across{" "}
                   {project.category.toLowerCase()} with a focus on{" "}
                   {project.deliverables.toLowerCase()}.
                 </span>
                 <span className="font-medium text-sm leading-4 mb-1 tracking-tight ">
-                  The goal was to shape a clear, memorable digital presence that
-                  feels aligned with the brand vision while making the
-                  experience feel premium and editorial.
+                  {project.challenge}
                 </span>
               </div>
             </div>
@@ -418,9 +423,7 @@ const Page = () => {
               </span>
               <div className="flex flex-col">
                 <span className="font-medium text-sm leading-4 mb-1 tracking-tight ">
-                  The work combines strategic positioning, visual language, and
-                  a polished digital experience to support the project across
-                  launch, storytelling, and long-term brand recognition.
+                  {project.identity}
                 </span>
               </div>
             </div>
@@ -430,38 +433,36 @@ const Page = () => {
               </span>
               <div className="flex flex-col">
                 <span className="font-medium text-sm leading-4 mb-1 tracking-tight ">
-                  The system balances expressive editorial typography with a
-                  refined product-led structure so the outcome feels both
-                  contemporary and commercially credible.
+                  {project.typography}
                 </span>
               </div>
             </div>
-            <div className="flex min-w-0 mt-40 sm:min-w-50 flex-col">
-              <span className="text-[#999] text-sm font-semibold tracking-tight">
+            <div className="flex min-w-0 mt-10 sm:min-w-50 flex-col">
+              <span className="text-[#999] text-sm font-medium tracking-tight">
                 Deliverables
               </span>
-              <span className="text-sm -mt-1 font-semibold tracking-tight">
+              <span className="text-sm -mt-1 font-medium  tracking-tight">
                 {project.deliverables}
               </span>
             </div>{" "}
             <div className="flex min-w-0  sm:min-w-50 flex-col">
-              <span className="text-[#999] text-sm font-semibold tracking-tight">
+              <span className="text-[#999] text-sm font-medium tracking-tight">
                 Client
               </span>
-              <span className="text-sm -mt-1 font-semibold tracking-tight">
+              <span className="text-sm -mt-1 font-medium tracking-tight">
                 {project.client}
               </span>
             </div>{" "}
             <div className="flex min-w-0  sm:min-w-50 flex-col">
-              <span className="text-[#999] text-sm font-semibold tracking-tight">
+              <span className="text-[#999] text-sm font-medium tracking-tight">
                 Year
               </span>
-              <span className="text-sm -mt-1 font-semibold tracking-tight">
+              <span className="text-sm -mt-1 font-medium tracking-tight">
                 {project.year}
               </span>
             </div>{" "}
             <div className="flex min-w-0  sm:min-w-50 flex-col">
-              <span className="text-[#999] text-sm font-semibold tracking-tight">
+              <span className="text-[#999] text-sm font-medium tracking-tight">
                 Visit
               </span>
               <a

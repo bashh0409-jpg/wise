@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MuxVideo from "@mux/mux-video-react";
@@ -11,6 +11,8 @@ export interface WorkProject {
   category: string;
   status: string;
   client: string;
+  challenge: string;
+  identity: string;
   year: string;
   visit: string;
   deliverables: string;
@@ -34,6 +36,8 @@ const WorkProjectCard = (project: WorkProject) => {
     image,
     video,
     visit,
+    challenge,
+    identity,
     alt,
     index,
     onHover,
@@ -41,14 +45,41 @@ const WorkProjectCard = (project: WorkProject) => {
     view = "list",
   } = project;
   const videoPoster = video ? getMuxThumbnailUrl(video) : undefined;
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isCursorLabelVisible, setIsCursorLabelVisible] = useState(false);
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
+    setCursorPosition({ x: event.clientX, y: event.clientY });
+    setIsCursorLabelVisible(true);
     onHover?.(project, event.currentTarget);
   };
 
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    setCursorPosition({ x: event.clientX, y: event.clientY });
+  };
+
   const handleMouseLeave = () => {
+    setIsCursorLabelVisible(false);
     onLeave?.();
   };
+
+  const cursorLabel = isCursorLabelVisible ? (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none  flex items-center gap- fixed z-[100] -translate-y-1/2 bg-[#f9fe01]  rounded-full font-mon text-[10px] font-semibold uppercase tracking-tight text-black"
+      style={{ left: cursorPosition.x + 14, top: cursorPosition.y }}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="20px"
+        viewBox="0 -960 960 960"
+        width="20px"
+        fill="#000"
+      >
+        <path d="M260-260v-220h52v168h168v52H260Zm388-220v-168H480v-52h220v220h-52Z" />
+      </svg>
+    </span>
+  ) : null;
 
   const cardContent =
     view === "grid" ? (
@@ -155,10 +186,12 @@ const WorkProjectCard = (project: WorkProject) => {
       >
         <article
           onMouseEnter={handleMouseEnter}
+          onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className="cursor-pointer"
         >
           {cardContent}
+          {cursorLabel}
         </article>
       </Link>
     );
@@ -171,10 +204,12 @@ const WorkProjectCard = (project: WorkProject) => {
     >
       <article
         onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className="grid grid-cols-[2rem_minmax(0,1fr)_4rem] items-center gap-3 border-t border-black/10 py-6 text-sm transition-colors duration-400 hover:bg-black/[0.03] sm:grid-cols-[2rem_minmax(7rem,1fr)_minmax(12rem,2fr)_minmax(8rem,1fr)_4rem] sm:gap-6"
       >
         {cardContent}
+        {cursorLabel}
       </article>
     </Link>
   );

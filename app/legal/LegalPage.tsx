@@ -153,7 +153,9 @@ const Page = () => {
                   <span className="opacity-0">______</span> If you have any
                   questions about this Privacy Policy, You can contact us by
                   email:{" "}
-                  <a href="mailto:hello@website.com">hello@website.com</a>
+                  <a href="mailto:hello@wisestudios.fyi">
+                    hello@wisestudios.fyi
+                  </a>
                 </span>
               </span>
             </div>

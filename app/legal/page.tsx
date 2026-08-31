@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import LegalPage from "./LegalPage";
 
 export const metadata: Metadata = {
-  title: "Legal",
+  title: "Legal ",
   description: "Privacy policy and legal notices for Wise Studios.",
   openGraph: {
     title: "Legal | Wise Studios",
     description: "Privacy policy and legal notices for Wise Studios.",
-    url: "https://wisestudios.com/legal",
+    url: "https://wisestudios.fyi/legal",
     siteName: "Wise Studios",
     type: "website",
   },

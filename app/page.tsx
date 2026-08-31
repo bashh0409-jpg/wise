@@ -248,13 +248,13 @@ const Page = () => {
       </div>
       <div
         ref={revealRef}
-        className="pointer-events-none fixed inset-0 z-50 flex"
+        className="pointer-events-none  fixed inset-0 z-51 flex"
       >
         {Array.from({ length: SLAT_COUNT }).map((_, i) => (
           <div
             key={i}
             data-slat
-            className="h-full flex-1 bg-white will-change-transform"
+            className="h-full flex-1 z-100 bg-white will-change-transform"
           />
         ))}
       </div>
