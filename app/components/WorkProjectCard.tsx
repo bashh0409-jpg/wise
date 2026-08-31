@@ -113,6 +113,7 @@ const WorkProjectCard = (project: WorkProject) => {
             <div className="h-full w-full bg-black/5" aria-label={alt} />
           )}
 
+          
           {video ? (
             <MuxVideo
               playbackId={video}
