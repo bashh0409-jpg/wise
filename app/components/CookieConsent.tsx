@@ -66,7 +66,7 @@ const CookieConsent = ({ onConsent }: CookieConsentProps) => {
       // left-1/2 + -translate-x-1/2 centers a fixed, auto-width element;
       // mx-auto alone has no effect here since a fixed element isn't
       // constrained by its parent's block width.
-      className="fixed bottom-11 left-1/2 z-50 w-max -translate-x-1/2 items-center justify-center rounded-full bg-[#999] p-1 pl-2"
+      className="fixed bottom-11 left-1/2 z-50 w-max -translate-x-1/2 items-center justify-center rounded-full bg-[#888] p-1 pl-2"
     >
       <div className="mx-auto flex items-center justify-between gap-4">
         <span className="text-sm font-medium text-white leading-4 tracking-tight">

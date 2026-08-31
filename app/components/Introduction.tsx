@@ -91,34 +91,35 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
       setIsMuted((prev) => !prev);
     };
 
-  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+    const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    const dismissedAt = stored ? Number(stored) : null;
-    const expired = dismissedAt !== null && Date.now() - dismissedAt > WEEK_MS;
+    useEffect(() => {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      const dismissedAt = stored ? Number(stored) : null;
+      const expired =
+        dismissedAt !== null && Date.now() - dismissedAt > WEEK_MS;
 
-    if (!stored || expired) setVisible(true);
-  }, []);
+      if (!stored || expired) setVisible(true);
+    }, []);
 
-  const dismiss = () => {
-    window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
-    onDismiss?.();
+    const dismiss = () => {
+      window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      onDismiss?.();
 
-    // Animate out before unmounting so dismissal doesn't feel abrupt.
-    if (cardRef.current) {
-      gsap.to(cardRef.current, {
-        y: 24,
-        opacity: 0,
-        scale: 0.98,
-        duration: 0.4,
-        ease: "power2.in",
-        onComplete: () => setVisible(false),
-      });
-    } else {
-      setVisible(false);
-    }
-  };
+      // Animate out before unmounting so dismissal doesn't feel abrupt.
+      if (cardRef.current) {
+        gsap.to(cardRef.current, {
+          y: 24,
+          opacity: 0,
+          scale: 0.98,
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => setVisible(false),
+        });
+      } else {
+        setVisible(false);
+      }
+    };
 
     // Exposed for cases like a "watch intro again" link elsewhere on the
     // page — bypasses the storage check entirely.
@@ -214,12 +215,13 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
             className=" w-full object-cover cursor-pointer transition-transform duration-700 group-hover:scale-101"
           />
         </div>
-<Link href="/work/project/vanta" >
-        <div className="flex cursor-pointer flex-col gap-2 p-1 px-2">
-          <p  className=" text-xs font-mono font-medium uppercase tracking-tight text-white">
-            {description}
-          </p>
-        </div></Link>
+        <Link href="/work/project/vanta">
+          <div className="flex cursor-pointer flex-col gap-2 p-1 px-2">
+            <p className=" text-xs font-mono font-medium uppercase tracking-tight text-white">
+              {description}
+            </p>
+          </div>
+        </Link>
       </div>
     );
   },
@@ -228,5 +230,3 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
 Introduction.displayName = "Introduction";
 
 export default Introduction;
-
-
