@@ -90,24 +90,34 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
       setIsMuted((prev) => !prev);
     };
 
-    const dismiss = () => {
-      window.localStorage.setItem(STORAGE_KEY, "true");
-      onDismiss?.();
+  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-      // Animate out before unmounting so dismissal doesn't feel abrupt.
-      if (cardRef.current) {
-        gsap.to(cardRef.current, {
-          y: 24,
-          opacity: 0,
-          scale: 0.98,
-          duration: 0.4,
-          ease: "power2.in",
-          onComplete: () => setVisible(false),
-        });
-      } else {
-        setVisible(false);
-      }
-    };
+  useEffect(() => {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    const dismissedAt = stored ? Number(stored) : null;
+    const expired = dismissedAt !== null && Date.now() - dismissedAt > WEEK_MS;
+
+    if (!stored || expired) setVisible(true);
+  }, []);
+
+  const dismiss = () => {
+    window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
+    onDismiss?.();
+
+    // Animate out before unmounting so dismissal doesn't feel abrupt.
+    if (cardRef.current) {
+      gsap.to(cardRef.current, {
+        y: 24,
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.4,
+        ease: "power2.in",
+        onComplete: () => setVisible(false),
+      });
+    } else {
+      setVisible(false);
+    }
+  };
 
     // Exposed for cases like a "watch intro again" link elsewhere on the
     // page — bypasses the storage check entirely.
@@ -124,12 +134,12 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
         aria-label="Introduction"
         className="fixed bottom-6 left-6 z-50 flex w-72 flex-col overflow-hidden rounded-lg bg-black shadow-xl"
       >
-        <div className="absolute z-100 backdrop-blur-md flex items-center rounded-full right-2 bottom-6 p-0.5 gap-0.5 bg-white/10">
+        <div className="absolute z-100 backdrop-blur-md flex items-center rounded-full right-2 bottom-6 p-0.5 gap-0.5 bg-black/10">
           <button
             type="button"
             onClick={handleMaximise}
             aria-label="Maximise video"
-            className="z-20 cursor-pointer rounded-full bg-white/1 backdrop-blur-md p-0.5 transition-all duration-500"
+            className="z-20 cursor-pointer rounded-full bg-black/1 backdrop-blur-md p-0.5 transition-all duration-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +155,7 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
             type="button"
             onClick={toggleSound}
             aria-label={isMuted ? "Unmute video" : "Mute video"}
-            className="z-20 cursor-pointer rounded-full bg-white/1 backdrop-blur-md p-0.5 transition-all duration-500"
+            className="z-20 cursor-pointer rounded-full bg-black/1 backdrop-blur-md p-0.5 transition-all duration-500"
           >
             {isMuted ? (
               <svg

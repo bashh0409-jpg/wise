@@ -98,8 +98,8 @@ const Page = () => {
   return (
     <div>
       <Navbar />
-      <Link href="/work/project/Vanta">
-      <Introduction videoKey="vanta" description=" Vanta" /></Link>
+     
+      <Introduction videoKey="vanta" description=" Vanta" />
 
       <main className="mt-50 flex flex-col p-4">
         <button
