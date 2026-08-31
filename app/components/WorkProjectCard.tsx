@@ -1,10 +1,7 @@
-"use client";
-
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MuxVideo from "@mux/mux-video-react";
-import gsap from "gsap";
 import { getMuxThumbnailUrl } from "../mux";
 
 export interface WorkProject {
@@ -45,71 +42,29 @@ const WorkProjectCard = (project: WorkProject) => {
     view = "list",
   } = project;
   const videoPoster = video ? getMuxThumbnailUrl(video) : undefined;
-
-  const cursorRef = useRef<HTMLSpanElement>(null);
-  // quickTo setters avoid re-rendering React on every mousemove — gsap drives the transform directly
-  const xTo = useRef<((value: number) => void) | null>(null);
-  const yTo = useRef<((value: number) => void) | null>(null);
-
-  useEffect(() => {
-    if (!cursorRef.current) return;
-
-    gsap.set(cursorRef.current, {
-      xPercent: 0,
-      yPercent: -50,
-      scale: 0,
-      opacity: 0,
-    });
-    xTo.current = gsap.quickTo(cursorRef.current, "x", {
-      duration: 0.5,
-      ease: "power3",
-    });
-    yTo.current = gsap.quickTo(cursorRef.current, "y", {
-      duration: 0.5,
-      ease: "power3",
-    });
-
-    return () => {
-      if (cursorRef.current) gsap.killTweensOf(cursorRef.current);
-    };
-  }, []);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isCursorLabelVisible, setIsCursorLabelVisible] = useState(false);
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
-    if (cursorRef.current) {
-      // snap to the entry point instantly so it doesn't glide in from the last position
-      gsap.set(cursorRef.current, { x: event.clientX + 14, y: event.clientY });
-      gsap.to(cursorRef.current, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.35,
-        ease: "back.out(2)",
-      });
-    }
+    setCursorPosition({ x: event.clientX, y: event.clientY });
+    setIsCursorLabelVisible(true);
     onHover?.(project, event.currentTarget);
   };
 
   const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
-    xTo.current?.(event.clientX + 14);
-    yTo.current?.(event.clientY);
+    setCursorPosition({ x: event.clientX, y: event.clientY });
   };
 
   const handleMouseLeave = () => {
-    if (cursorRef.current) {
-      gsap.to(cursorRef.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.25,
-        ease: "power2.in",
-      });
-    }
+    setIsCursorLabelVisible(false);
     onLeave?.();
   };
 
-  const cursorLabel = (
+  const cursorLabel = isCursorLabelVisible ? (
     <span
-      ref={cursorRef}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[100] flex items-center gap-1 rounded-full bg-[#f9fe01] font-mono text-[10px] font-semibold uppercase tracking-tight text-black opacity-0 [will-change:transform]"
+      className="pointer-events-none  flex items-center gap- fixed z-[100] -translate-y-1/2 bg-[#f9fe01]  rounded-full font-mon text-[10px] font-semibold uppercase tracking-tight text-black"
+      style={{ left: cursorPosition.x + 14, top: cursorPosition.y }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +76,7 @@ const WorkProjectCard = (project: WorkProject) => {
         <path d="M260-260v-220h52v168h168v52H260Zm388-220v-168H480v-52h220v220h-52Z" />
       </svg>
     </span>
-  );
+  ) : null;
 
   const cardContent =
     view === "grid" ? (
