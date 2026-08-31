@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import { ResumeDetails } from "../components/ResumeDetails";
 import Footer from "../components/Footer";
 import { getMuxPlaybackId } from "../mux";
+import Introduction from "../components/Introduction";
 
 const Page = () => {
   const [imageHovered, setImageHovered] = useState(false);
@@ -23,6 +24,11 @@ const Page = () => {
 
   return (
     <div className="w-full scrollbar-hide bg-white">
+      <Introduction
+        videoKey="kunye"
+        description=" Elona Hanna Hayes."
+      />
+
       <Navbar />
       <div className="mt-40 grid w-full grid-cols-1 gap-10 p-6 md:grid-cols-2">
         <h1 className="mb-4 text-3xl font-semibold tracking-tighter text-[#999] md:text-5xl">
@@ -119,7 +125,6 @@ const Page = () => {
                 />
                 {aboutVideo && (
                   <div>
-                    
                     <span
                       aria-hidden="true"
                       className="absolute inset-0 -z-1 flex items-center justify-center"
