@@ -212,7 +212,7 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
             preload="metadata"
             streamType="on-demand"
             capRenditionToPlayerSize
-            className=" w-full object-cover cursor-pointer transition-transform duration-700 group-hover:scale-101"
+            className=" w-full object-cover rounded -z-1 cursor-pointer transition-transform duration-700 group-hover:scale-101"
           />
         </div>
         <Link href="/work/project/vanta">
