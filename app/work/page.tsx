@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import WorkPage from "./WorkPage";
+import TabTitle from "../components/tab-title";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -19,12 +20,11 @@ export const metadata: Metadata = {
   },
 };
 
-const page = () => {
+export default function Page() {
   return (
-    <div>
+    <>
+      <TabTitle />
       <WorkPage />
-    </div>
+    </>
   );
-};
-
-export default page;
+}

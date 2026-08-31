@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import AboutPage from "./AboutPage";
+import TabTitle from "../components/tab-title";
 
 export const metadata: Metadata = {
   title: "About",
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <div>
+      <TabTitle />
       <AboutPage />
     </div>
   );

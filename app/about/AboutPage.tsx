@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import { getMuxPlaybackId } from "../mux";
 import Introduction from "../components/Introduction";
 
+
 const Page = () => {
   const [imageHovered, setImageHovered] = useState(false);
   const aboutVideo = getMuxPlaybackId("about");

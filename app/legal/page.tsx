@@ -1,9 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
 import LegalPage from "./LegalPage";
+import TabTitle from "../components/tab-title";
 
 export const metadata: Metadata = {
-  title: "Legal ",
+  title: "Legal",
   description: "Privacy policy and legal notices for Wise Studios.",
   openGraph: {
     title: "Legal | Wise Studios",
@@ -17,19 +18,17 @@ export const metadata: Metadata = {
     title: "Legal | Wise Studios",
     description: "Privacy policy and legal notices for Wise Studios.",
   },
-  // legal pages generally shouldn't rank in search or get link previews as "content"
   robots: {
     index: true,
     follow: true,
   },
 };
 
-const page = () => {
+export default function Page() {
   return (
-    <div>
+    <>
+      <TabTitle />
       <LegalPage />
-    </div>
+    </>
   );
-};
-
-export default page;
+}
