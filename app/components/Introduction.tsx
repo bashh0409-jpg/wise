@@ -14,6 +14,7 @@ import {
   getMuxThumbnailUrl,
   type MuxVideoKey,
 } from "@/app/mux";
+import Link from "next/link";
 
 const STORAGE_KEY = "introduction-seen";
 
@@ -213,12 +214,12 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
             className=" w-full object-cover cursor-pointer transition-transform duration-700 group-hover:scale-101"
           />
         </div>
-
+<Link href="/work/project/vanta" >
         <div className="flex cursor-pointer flex-col gap-2 p-1 px-2">
-          <span className=" text-xs font-mono font-medium uppercase tracking-tight text-white">
+          <p  className=" text-xs font-mono font-medium uppercase tracking-tight text-white">
             {description}
-          </span>
-        </div>
+          </p>
+        </div></Link>
       </div>
     );
   },

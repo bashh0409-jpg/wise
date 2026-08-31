@@ -55,13 +55,14 @@ export const projects: ProjectDetail[] = [
     typography:
       "A quiet, humanist sans anchors the wordmark, deliberately understated so the products stay the visual focus rather than the branding.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Rhode skin",
     visit: "https://rode.com",
   },
   {
     id: "Beanos_Cafe",
     title: "Beano's Cafe",
-    description: "A digital-first identity for a fast-growing skincare label",
+    description:
+      "Fast growing food product sold in multiple towns acros South Africa",
     category: "Food & Drinks",
     image: "/images/Beano.avif",
     alt: "Luma project",
@@ -74,7 +75,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A rounded, friendly display face for signage-style headers sits against a clean serif for menu and body copy, echoing printed cafe menus.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Beanos",
     visit: "https://beanos.com",
   },
 
@@ -95,7 +96,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A condensed, technical sans built for legibility at speed carries the wordmark, with a monospace variant reserved for stats and data displays.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Redline Inc",
     visit: "https://redline.com",
   },
   {
@@ -114,7 +115,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "An airy, low-contrast serif for feature headlines pairs with a compact sans for captions, keeping dense photo-led pages from feeling cluttered.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Unna  (Pty)Ltd",
     visit: "https://unna.com",
   },
   {
@@ -133,7 +134,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A warm slab serif gives headlines a grounded, architectural feel, balanced by a light sans for captions and metadata throughout the layout.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Tallow Finance",
     visit: "https://tallow.com",
   },
   {
@@ -152,7 +153,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A refined, low-contrast serif communicates clinical credibility, offset by a rounded sans used for ingredient callouts and how-to content.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Ilia Inc",
     visit: "https://ilia.com",
   },
   {
@@ -172,7 +173,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A bouncy, characterful display typeface anchors hero moments, paired with a straightforward grotesque for product listings and checkout flow.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Vanta Inc",
     visit: "https://vanta.com",
   },
   {
@@ -191,7 +192,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A bold, compressed sans carries every headline at maximum impact, deliberately loud enough to hold its own against high-energy photography.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Nike",
     visit: "https://nike.com",
   },
   {
@@ -210,7 +211,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A gentle serif for headlines evokes warmth and craft, set against a simple monospace used for product specs and technical detail.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Hearth",
     visit: "https://hearth.cyi",
   },
   {
@@ -230,7 +231,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "An elongated, high-fashion serif drives the wordmark and campaign titles, with a tight, neutral sans reserved for all functional copy.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Dua",
     visit: "https://dua.com",
   },
   {
@@ -249,7 +250,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A cinematic, tightly tracked display type sets the tone for titles and posters, complemented by a clean sans for scheduling and program information.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "eWay",
     visit: "https://eway.fyi",
   },
   {
@@ -268,13 +269,13 @@ export const projects: ProjectDetail[] = [
     typography:
       "A sharp, geometric sans handles all data and labeling, while a slightly heavier weight of the same family carries headlines for consistency across dense and sparse layouts alike.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Echelon",
     visit: "https://echelon.fyi",
   },
   {
     id: "Porsce_911",
     title: "Porsce 911",
-    description: "A digital-first identity for a fast-growing skincare label",
+    description: "Cars are Fun, so Porsche brings class and reliability",
     category: "Sport & Cars",
     image: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
     video: getMuxPlaybackId("porsce911"),
@@ -288,7 +289,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A precise, engineering-style sans is used throughout, referencing technical drawing conventions rather than traditional automotive branding.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Client Inc",
+    client: "Porsche",
     visit: "https://porsce.com",
   },
   {
@@ -326,7 +327,7 @@ export const projects: ProjectDetail[] = [
     typography:
       "A distorted, glitch-inflected display type carries titles and release names, contrasted with a plain, highly legible sans for credits and tracklists.",
     deliverables: "Strategy, Brand, Experience",
-    client: "Shimza",
+    client: "Kunye x Shimza",
     visit: "https://kunye.com",
   },
   {

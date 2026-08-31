@@ -7,7 +7,7 @@ type TabTitleProps = {
 };
 
 export default function TabTitle({
-  awayTitle = "🙈Come back | Wise Studios",
+  awayTitle = "🙈Come back...",
 }: TabTitleProps) {
   useEffect(() => {
     const originalTitle = document.title;

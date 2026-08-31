@@ -27,7 +27,7 @@ const Page = () => {
     <div className="w-full scrollbar-hide bg-white">
       <Introduction
         videoKey="kunye"
-        description=" Elona Hanna Hayes."
+        description=" about Wise studios."
       />
 
       <Navbar />
