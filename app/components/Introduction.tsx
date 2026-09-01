@@ -211,7 +211,7 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
                 height="14px"
                 viewBox="0 -960 960 960"
                 width="14px"
-                fill="#fff"
+                fill="#000"
               >
                 <path d="m560-120-57-57 144-143H200v-480h80v400h367L503-544l56-57 241 241-240 240Z" />
               </svg>
