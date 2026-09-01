@@ -235,23 +235,61 @@ export const projects: ProjectDetail[] = [
     visit: "https://dua.com",
   },
   {
-    id: "eWay",
-    title: "eWay",
+    id: "Fur",
+    title: "Fur",
+    description: "A campaign-led rebrand for a contemporary fashion label",
+    category: "Fashion & Beauty",
+    image: "/images/fur.avif",
+    alt: "Fur project",
+    status: "Complete",
+    year: "2024",
+    challenge:
+      "Dua's previous identity read as generically luxury, blending in with a dozen comparable labels. The rebrand needed a sharper point of view without alienating the existing customer base.",
+    identity:
+      "The new system is built on asymmetry — off-grid layouts, an irregular logo lockup, and a willingness to leave large areas of negative space that feel intentional rather than empty.",
+    typography:
+      "An elongated, high-fashion serif drives the wordmark and campaign titles, with a tight, neutral sans reserved for all functional copy.",
+    deliverables: "Strategy, Brand, Experience",
+    client: "Fur",
+    visit: "https://fur.com",
+  },
+  {
+    id: "It's Okay",
+    title: "It's Okay",
     description: "An atmospheric campaign for a new independent film festival",
     category: "Travel",
-    video: getMuxPlaybackId("eWay"),
+    image: "/images/itsokay.avif",
     alt: "Afterglow project",
     status: "Complete",
     year: "2023",
     challenge:
-      "As a first-year festival with no existing audience, eWay needed a visual identity strong enough to feel established from launch, while remaining flexible for future programming themes.",
+      "As a first-year festival with no existing audience, It's Okay needed a visual identity strong enough to feel established from launch, while remaining flexible for future programming themes.",
     identity:
       "The identity is built around a shifting gradient system tied to festival sections, giving each program strand its own atmosphere within one cohesive visual framework.",
     typography:
       "A cinematic, tightly tracked display type sets the tone for titles and posters, complemented by a clean sans for scheduling and program information.",
     deliverables: "Strategy, Brand, Experience",
-    client: "eWay",
-    visit: "https://eway.fyi",
+    client: "It's Okay",
+    visit: "https://itsokay.fyi",
+  },
+  {
+    id: "ccus",
+    title: "ccus",
+    description: "An atmospheric campaign for a new independent film festival",
+    category: "Education",
+    video: getMuxPlaybackId("ccus"),
+    alt: "Afterglow project",
+    status: "Complete",
+    year: "2023",
+    challenge:
+      "As a first-year festival with no existing audience, ccus needed a visual identity strong enough to feel established from launch, while remaining flexible for future programming themes.",
+    identity:
+      "The identity is built around a shifting gradient system tied to festival sections, giving each program strand its own atmosphere within one cohesive visual framework.",
+    typography:
+      "A cinematic, tightly tracked display type sets the tone for titles and posters, complemented by a clean sans for scheduling and program information.",
+    deliverables: "Strategy, Brand, Experience",
+    client: "ccus",
+    visit: "https://ccus.fyi",
   },
   {
     id: "echelon",

@@ -9,8 +9,10 @@ const clients = [
   "Just Do It (JDI-145-WISE))",
   "Ilia (IL-108-WISE)",
   "eWay (EW-109-WISE)",
+  "CCUS (CC-114-WISE)",
   "UNNA (UN-110-WISE)",
   "Dua (DUA-111-WISE)",
+  "Fur (FR-112-WISE)",
 ];
 
 const talks = [
