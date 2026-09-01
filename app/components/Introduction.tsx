@@ -9,28 +9,18 @@ import {
 } from "react";
 import { gsap } from "gsap";
 import MuxVideo from "@mux/mux-player-react";
-import {
-  getMuxPlaybackId,
-  getMuxThumbnailUrl,
-  type MuxVideoKey,
-} from "@/app/mux";
+import { getMuxPlaybackId, type MuxVideoKey } from "@/app/mux";
 import Link from "next/link";
 
 const STORAGE_KEY = "introduction-seen";
-
-// mux-player's style prop accepts standard CSS plus its own custom
-// properties (--controls, etc). React.CSSProperties has no index
-// signature for `--${string}` keys, so casting to it directly fails
-// type-check — this local type adds that signature.
-type MuxCSSProperties = React.CSSProperties & {
-  [key: `--${string}`]: string | number;
-};
 
 export interface IntroductionProps {
   /** Key into muxPlaybackIds — resolved to a playback ID and poster internally. */
   videoKey: MuxVideoKey;
   /** One or two lines of supporting copy, shown under the video. */
   description: string;
+  /** Optional project link shown under the description when provided. */
+  href?: string;
   /** Called after the user dismisses the card. */
   onDismiss?: () => void;
 }
@@ -41,14 +31,10 @@ export interface IntroductionHandle {
 }
 
 const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
-  ({ videoKey, description, onDismiss }, ref) => {
+  ({ videoKey, description, href, onDismiss }, ref) => {
     // Null while we haven't checked storage yet, to avoid a flash of the
     // card before we know whether it was already dismissed.
     const [visible, setVisible] = useState(false);
-    // Tracks real playback, not just mount — the thumbnail stays up
-    // until Mux actually has a frame painted, since `poster` alone can
-    // still flash to black while the stream negotiates its first segment.
-    const [isPlaying, setIsPlaying] = useState(false);
     // Starts muted to match the existing autoplay behavior (autoplay
     // with sound is blocked by most browsers anyway); the button flips
     // this, which drives the `muted` prop below.
@@ -60,9 +46,6 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
     const playerRef = useRef<React.ComponentRef<typeof MuxVideo>>(null);
 
     const playbackId = getMuxPlaybackId(videoKey);
-    const thumbnailUrl = playbackId
-      ? getMuxThumbnailUrl(playbackId)
-      : undefined;
 
     useEffect(() => {
       const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -91,13 +74,11 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
       setIsMuted((prev) => !prev);
     };
 
-    const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-
     useEffect(() => {
+      const weekMs = 7 * 24 * 60 * 60 * 1000;
       const stored = window.localStorage.getItem(STORAGE_KEY);
       const dismissedAt = stored ? Number(stored) : null;
-      const expired =
-        dismissedAt !== null && Date.now() - dismissedAt > WEEK_MS;
+      const expired = dismissedAt !== null && Date.now() - dismissedAt > weekMs;
 
       if (!stored || expired) setVisible(true);
     }, []);
@@ -134,7 +115,7 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
         ref={cardRef}
         role="dialog"
         aria-label="Introduction"
-        className="fixed bottom-6 left-6 z-50 flex w-72 flex-col overflow-hidden rounded-lg bg-black shadow-xl"
+        className="fixed bottom-6 left-6 z-50 flex w-72 flex-col overflow-hidden rounded-md bg-black shadow-xl"
       >
         <div className="absolute z-100 backdrop-blur-md flex items-center rounded-full right-2 bottom-6 p-0.5 gap-0.5 bg-black/10">
           <button
@@ -215,13 +196,28 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
             className=" w-full object-cover rounded -z-1 cursor-pointer transition-transform duration-700 group-hover:scale-101"
           />
         </div>
-        <Link href="/work/project/vanta">
-          <div className="flex cursor-pointer flex-col gap-2 p-1 px-2">
-            <p className=" text-xs font-mono font-medium uppercase tracking-tight text-white">
-              {description}
-            </p>
-          </div>
-        </Link>
+
+        <div className="flex cursor-pointer items-center justify-between gap-2 p-1 px-2">
+          <p className=" text-xs font-mono font-medium uppercase tracking-tight text-white">
+            {description}
+          </p>
+          {href ? (
+            <Link
+              className="text-xs font-mono font-medium uppercase tracking-tight text-white"
+              href={href}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="14px"
+                viewBox="0 -960 960 960"
+                width="14px"
+                fill="#fff"
+              >
+                <path d="m560-120-57-57 144-143H200v-480h80v400h367L503-544l56-57 241 241-240 240Z" />
+              </svg>
+            </Link>
+          ) : null}
+        </div>
       </div>
     );
   },

@@ -11,7 +11,6 @@ import Footer from "../components/Footer";
 import { getMuxThumbnailUrl } from "../mux";
 import { projects } from "../../lib/projects";
 import Introduction from "../components/Introduction";
-import Link from "next/link";
 
 const statuses = [
   "All",
@@ -98,8 +97,12 @@ const Page = () => {
   return (
     <div>
       <Navbar />
-     
-      <Introduction videoKey="vanta" description=" Vanta" />
+
+      <Introduction
+        videoKey="vanta"
+        description="Vanta"
+        href="/work/project/vanta"
+      />
 
       <main className="mt-50 flex flex-col p-4">
         <button

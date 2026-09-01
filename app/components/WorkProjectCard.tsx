@@ -127,7 +127,7 @@ const WorkProjectCard = (project: WorkProject) => {
               preload="metadata"
               streamType="on-demand"
               capRenditionToPlayerSize
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-101"
+              className="h-full w-full  object-cover transition-transform duration-700 group-hover:scale-101"
             />
           ) : image ? (
             <Image
