@@ -296,7 +296,7 @@ export const projects: ProjectDetail[] = [
   {
     id: "echelon",
     title: "Echelon",
-    description: "An atmospheric campaign for a new independent film festival",
+    description: "An atmospheric campaign for a new independent sporting brand",
     category: "Sport",
     image: "/images/echelon.avif",
     alt: "Echelon project",
