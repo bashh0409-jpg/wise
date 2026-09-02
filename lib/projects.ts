@@ -16,6 +16,8 @@ export type ProjectDetail = {
   image?: string;
   /** Public Mux playback ID. */
   video?: string;
+  /** Additional gallery images shown below the hero. Length drives the grid layout — leave empty/undefined to show hero only. */
+  gallery?: string[];
   alt: string;
 };
 
@@ -254,7 +256,7 @@ export const projects: ProjectDetail[] = [
     visit: "https://fur.com",
   },
   {
-    id: "It's Okay",
+    id: "Its_Okay",
     title: "It's Okay",
     description: "An atmospheric campaign for a new independent film festival",
     category: "Travel",

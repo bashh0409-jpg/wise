@@ -115,7 +115,7 @@ const Introduction = forwardRef<IntroductionHandle, IntroductionProps>(
         ref={cardRef}
         role="dialog"
         aria-label="Introduction"
-        className="fixed bottom-6 left-6 z-50 flex w-72 flex-col overflow-hidden rounded-md bg-black shadow-xl"
+        className="fixed bottom-6 left-6 z-50 flex w-72 flex-col overflow-hidden rounded-lg bg-black shadow-xl"
       >
         <div className="absolute z-100 backdrop-blur-md flex items-center rounded-full right-2 bottom-6 p-0.5 gap-0.5 bg-black/10">
           <button
