@@ -394,9 +394,9 @@ const Page = () => {
           <div className="max-w-xl mt-10 gap-4 flex flex-col ">
             <div>
               <h1 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter font-semibold max-w-full md:max-w-[60%] leading-tight md:leading-12 mb-2">
-              {project.title}
+                {project.title}
               </h1>
-             
+
               <span className=" flex flex-col  text-sm mb-4 font-medium tracking-tight ">
                 {project.category}
               </span>

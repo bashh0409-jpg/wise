@@ -28,7 +28,8 @@ const Navbar = forwardRef<
 
   const asideRef = useRef<HTMLDivElement>(null);
   const linksContainerRef = useRef<HTMLDivElement>(null);
-  const isFirstRender = useRef(true); // skip animating the panel into place on initial mount
+  const desktopLinksRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const closeSidebar = () => {
     const panel = asideRef.current;
@@ -74,16 +75,22 @@ const Navbar = forwardRef<
     };
 
     updateTime();
+
     const interval = window.setInterval(updateTime, 1_000);
+
     return () => window.clearInterval(interval);
   }, []);
 
   useLayoutEffect(() => {
     const panel = asideRef.current;
+
     if (!panel) return;
 
     if (isFirstRender.current) {
-      gsap.set(panel, { clipPath: "inset(0% 0% 0% 100%)" });
+      gsap.set(panel, {
+        clipPath: "inset(0% 0% 0% 100%)",
+      });
+
       isFirstRender.current = false;
       return;
     }
@@ -92,16 +99,22 @@ const Navbar = forwardRef<
       ? Array.from(linksContainerRef.current.querySelectorAll("a"))
       : [];
 
-    // scoped context so revert() only kills tweens this effect created
     const ctx = gsap.context(() => {
       if (sidebarOpen) {
-        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+        const tl = gsap.timeline({
+          defaults: { ease: "power4.out" },
+        });
+
         tl.to(panel, {
           clipPath: "inset(0% 0% 0% 0%)",
           duration: 0.8,
         }).fromTo(
           items,
-          { y: 20, opacity: 0, filter: "blur(6px)" },
+          {
+            y: 20,
+            opacity: 0,
+            filter: "blur(6px)",
+          },
           {
             y: 0,
             opacity: 1,
@@ -117,6 +130,63 @@ const Navbar = forwardRef<
     return () => ctx.revert();
   }, [sidebarOpen]);
 
+  useLayoutEffect(() => {
+    const container = desktopLinksRef.current;
+
+    if (!container) return;
+
+    const ctx = gsap.context(() => {
+      const navLinks = Array.from(
+        container.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
+      );
+
+      navLinks.forEach((link) => {
+        const underline = link.querySelector<HTMLSpanElement>(
+          "[data-nav-underline]",
+        );
+
+        if (!underline) return;
+
+        gsap.set(underline, {
+          scaleX: 0,
+          transformOrigin: "left center",
+        });
+
+        const handleMouseEnter = () => {
+          gsap.killTweensOf(underline);
+
+          gsap.to(underline, {
+            scaleX: 1,
+            transformOrigin: "left center",
+            duration: 0.35,
+            ease: "power3.out",
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.killTweensOf(underline);
+
+          gsap.to(underline, {
+            scaleX: 0,
+            transformOrigin: "right center",
+            duration: 0.3,
+            ease: "power3.inOut",
+          });
+        };
+
+        link.addEventListener("mouseenter", handleMouseEnter);
+        link.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+          link.removeEventListener("mouseenter", handleMouseEnter);
+          link.removeEventListener("mouseleave", handleMouseLeave);
+        };
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <nav
@@ -126,13 +196,26 @@ const Navbar = forwardRef<
         <Link href="/" className="font-bold italic tracking-tighter text-white">
           WISE
         </Link>
-        <span className="w-[6rem] tracking-tighter whitespace-nowrap text-right tabular-nums text-white">
+
+        <span className="w-[6rem] whitespace-nowrap text-right tabular-nums tracking-tighter text-white">
           {currentTime || localTime}
         </span>
-        <div className="hidden gap-2 text-white sm:flex">
+
+        <div ref={desktopLinksRef} className="hidden gap-2 text-white sm:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:underline">
+            <Link
+              key={link.href}
+              href={link.href}
+              data-nav-link
+              className="relative inline-block"
+            >
               {link.label}
+
+              <span
+                data-nav-underline
+                aria-hidden="true"
+                className="absolute bottom-0 left-0 h-px w-full origin-left bg-current"
+              />
             </Link>
           ))}
 
@@ -140,11 +223,18 @@ const Navbar = forwardRef<
             href={bookingUrl}
             target="_blank"
             rel="noreferrer"
-            className="hover:underline"
+            data-nav-link
+            className="relative inline-block"
           >
             Consult
+            <span
+              data-nav-underline
+              aria-hidden="true"
+              className="absolute bottom-0 left-0 h-px w-full origin-left bg-current"
+            />
           </a>
         </div>
+
         <button
           type="button"
           aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
@@ -155,19 +245,24 @@ const Navbar = forwardRef<
           <span className="sr-only">
             {sidebarOpen ? "Close navigation" : "Open navigation"}
           </span>
+
           <span className="flex flex-col gap-1">
             <span className="h-px w-5 bg-current" />
             <span className="h-px w-5 bg-current" />
           </span>
         </button>
       </nav>
+
       <aside
         ref={asideRef}
         aria-hidden={!sidebarOpen}
-        className={`fixed right-0 top-0 z-100 flex h-full w-full flex-col bg-white p-6 text-black sm:hidden ${sidebarOpen ? "" : "pointer-events-none"}`}
+        className={`fixed right-0 top-0 z-100 flex h-full w-full flex-col bg-white p-6 text-black sm:hidden ${
+          sidebarOpen ? "" : "pointer-events-none"
+        }`}
       >
         <div className="flex items-center justify-between">
           <span className="font-bold italic tracking-tighter">WISE</span>
+
           <button
             type="button"
             aria-label="Close navigation"
@@ -179,15 +274,16 @@ const Navbar = forwardRef<
               height="24px"
               viewBox="0 -960 960 960"
               width="24px"
-              fill="#"
+              fill="currentColor"
             >
               <path d="M256-213.85 213.85-256l224-224-224-224L256-746.15l224 224 224-224L746.15-704l-224 224 224 224L704-213.85l-224-224-224 224Z" />
             </svg>
           </button>
         </div>
+
         <div
           ref={linksContainerRef}
-          className="my-auto flex flex-col uppercase text-2xl font-medium tracking-tighter"
+          className="my-auto flex flex-col text-2xl font-medium uppercase tracking-tighter"
         >
           {links.map((link) => (
             <Link key={link.href} href={link.href} onClick={closeSidebar}>
@@ -204,11 +300,13 @@ const Navbar = forwardRef<
             Consult
           </a>
         </div>
-        <div className="flex w-full text-sm justify-between items-center font-medium tracking-tight">
-          <div className="flex  flex-col">
-            <span>Software engrineer </span>
-            <span className="-mt-1">South Africa, PMB </span>
+
+        <div className="flex w-full items-center justify-between text-sm font-medium tracking-tight">
+          <div className="flex flex-col">
+            <span>Software engrineer</span>
+            <span className="-mt-1">South Africa, PMB</span>
           </div>
+
           <span>©2026 Wise Studios</span>
         </div>
       </aside>
@@ -219,7 +317,3 @@ const Navbar = forwardRef<
 Navbar.displayName = "Navbar";
 
 export default Navbar;
-
-// Design note: replaced the CSS transition-transform with GSAP so the panel slide
-// and link stagger can overlap ("-=0.35") instead of firing sequentially — reads
-// as one continuous motion rather than "panel stops, then text pops in."

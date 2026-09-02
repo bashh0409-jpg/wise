@@ -143,7 +143,7 @@ const Page = () => {
                 setActiveProject(null);
                 setViewMode("grid");
               }}
-              className={`cursor-pointer rounded px-1 ${viewMode === "grid" ? "text-black" : "text-[#999] hover:text-black"}`}
+              className={`cursor-pointer transition-all duration-400 rounded px-1 ${viewMode === "grid" ? "text-black" : "text-[#999] hover:text-black"}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +163,7 @@ const Page = () => {
                 setActiveProject(null);
                 setViewMode("list");
               }}
-              className={`cursor-pointer rounded px-1 ${viewMode === "list" ? "text-black" : "text-[#999] hover:text-black"}`}
+              className={`cursor-pointer transition-all duration-400 rounded px-1 ${viewMode === "list" ? "text-black" : "text-[#999] hover:text-black"}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -187,8 +187,8 @@ const Page = () => {
                 }}
                 className={
                   statusFilter === status
-                    ? "text-black uppercase cursor-pointer"
-                    : "hover:text-black cursor-pointer "
+                    ? "text-black transition-all duration-500 cursor-pointer"
+                    : "hover:text-black transition-all duration-400 cursor-pointer "
                 }
               >
                 {status}

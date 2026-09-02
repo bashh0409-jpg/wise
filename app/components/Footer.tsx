@@ -59,7 +59,7 @@ const ContactColumn = ({
         <li key={contact.label} className="font-semibold">
           <a
             href={contact.href}
-            className="flex w-full justify-between hover:underline"
+            className="flex w-full  justify-between hover:underline"
           >
             <span className="text-[#999]">{contact.label}: </span>
             {contact.value}
