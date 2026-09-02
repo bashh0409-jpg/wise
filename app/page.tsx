@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import MuxVideo from "@mux/mux-video-react";
+import Link from "next/link";
 import Navbar from "./components/Navbar";
 import SplitScramble, { SplitScrambleHandle } from "./components/SplitScramble";
 import { projects, type ProjectDetail } from "@/lib/projects";
@@ -43,7 +44,7 @@ const ProjectCard = ({
   onHover: (project: ProjectDetail) => void;
   onLeave: () => void;
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
   const titleRef = useRef<SplitScrambleHandle>(null);
   const descriptionRef = useRef<SplitScrambleHandle>(null);
 
@@ -62,8 +63,9 @@ const ProjectCard = ({
   };
 
   return (
-    <div
+    <Link
       ref={cardRef}
+      href={`/work/project/${project.id}`}
       onMouseEnter={() => {
         onHover(project);
         animateText("#6ff45d");
@@ -90,7 +92,7 @@ const ProjectCard = ({
         </span>
         <span className="text-xs tracking-tighter">{project.year}</span>
       </span>
-    </div>
+    </Link>
   );
 };
 
