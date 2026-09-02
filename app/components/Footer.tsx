@@ -1,4 +1,5 @@
 import React from "react";
+import NewsletterSignup from "./NewsletterSignup";
 
 interface ContactLink {
   label: string;
@@ -14,13 +15,13 @@ interface SocialLink {
 const BUSINESS_CONTACTS: ContactLink[] = [
   {
     label: "Business",
-    value: "hello@wisestudios.fyi",
-    href: "mailto:hello@wisestudios.fyi",
+    value: "hello@thewisestudio.xyz",
+    href: "mailto:hello@thewisestudio.xyz",
   },
   {
     label: "Careers",
-    value: "careers@wisestudios.fyi",
-    href: "mailto:careers@wisestudios.fyi",
+    value: "careers@thewisestudio.xyz",
+    href: "mailto:careers@thewisestudio.xyz",
   },
 ];
 
@@ -28,8 +29,8 @@ const GENERAL_CONTACTS: ContactLink[] = [
   { label: "Tel", value: "+27 (81) 590-9191", href: "tel:+27815909191" },
   {
     label: "Mail",
-    value: "info@wisestudios.fyi",
-    href: "mailto:info@wisestudios.fyi",
+    value: "info@thewisestudio.xyz",
+    href: "mailto:info@thewisestudio.xyz",
   },
   {
     label: "Instagram",
@@ -37,7 +38,6 @@ const GENERAL_CONTACTS: ContactLink[] = [
     href: "https://www.instagram.com/wisestudios/",
   },
 ];
-
 
 const SOCIALS: SocialLink[] = [
   { label: "Instagram", href: "https://www.instagram.com/wisestudios/" },
@@ -79,11 +79,7 @@ const Footer = () => {
           contacts={BUSINESS_CONTACTS}
         />
         <ContactColumn title="General Enquiries" contacts={GENERAL_CONTACTS} />
-
-        <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
-          <span />
-          <span className="font-semibold text-[#999">Made by Wise Studios</span>
-        </div>
+        <NewsletterSignup />
       </div>
 
       <div className="grid grid-cols-2 items-end tracking-tighter md:grid-cols-3">
@@ -115,9 +111,7 @@ const Footer = () => {
           >
             Legal Notice
           </a>
-          <span className="text-[#999]">
-            (Pty) Ltd Reg No: 2026/______/07
-          </span>
+          <span className="text-[#999]">(Pty) Ltd Reg No: 2026/______/07</span>
         </div>
       </div>
     </footer>

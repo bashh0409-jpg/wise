@@ -36,7 +36,7 @@ const experiences: Experience[] = [
   {
     years: "2025-20__",
     role: "Founder, Software Engineer",
-    company: "Wise Studios, Woodlands",
+    company: "The Wise Studio, Woodlands",
   },
   {
     years: "2024-2025",

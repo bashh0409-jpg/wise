@@ -5,18 +5,18 @@ import TabTitle from "../components/tab-title";
 
 export const metadata: Metadata = {
   title: "Legal",
-  description: "Privacy policy and legal notices for Wise Studios.",
+  description: "Privacy policy and legal notices for The Wise Studio.",
   openGraph: {
-    title: "Legal | Wise Studios",
-    description: "Privacy policy and legal notices for Wise Studios.",
-    url: "https://wisestudios.fyi/legal",
-    siteName: "Wise Studios",
+    title: "Legal | The Wise Studio",
+    description: "Privacy policy and legal notices for The Wise Studio.",
+    url: "https://thewisestudio.xyz/legal",
+    siteName: "The Wise Studio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Legal | Wise Studios",
-    description: "Privacy policy and legal notices for Wise Studios.",
+    title: "Legal | The Wise Studio",
+    description: "Privacy policy and legal notices for The Wise Studio.",
   },
   robots: {
     index: true,

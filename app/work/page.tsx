@@ -5,18 +5,18 @@ import TabTitle from "../components/tab-title";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Selected client work and case studies from Wise Studios.",
+  description: "Selected client work and case studies from The Wise Studio.",
   openGraph: {
-    title: "Work | Wise Studios",
-    description: "Selected client work and case studies from Wise Studios.",
-    url: "https://wisestudios.fyi/work",
-    siteName: "Wise Studios",
+    title: "Work | The Wise Studio",
+    description: "Selected client work and case studies from The Wise Studio.",
+    url: "https://thewisestudio.xyz/work",
+    siteName: "The Wise Studio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Work | Wise Studios",
-    description: "Selected client work and case studies from Wise Studios.",
+    title: "Work | The Wise Studio",
+    description: "Selected client work and case studies from The Wise Studio.",
   },
 };
 

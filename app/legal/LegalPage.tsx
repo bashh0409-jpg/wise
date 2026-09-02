@@ -40,10 +40,10 @@ const Page = () => {
 
           <div className="lg:grid-cols-2 grid-cols-1 grid mt-8 gap-4">
             <p className="font-medium text-lg  leading-6 tracking-tighter">
-              Welcome to Wise Studios. These Terms of Service (“Terms”) govern
-              your use of our website, products, and services. By accessing or
-              using our services, you agree to comply with these Terms. If you
-              do not agree, please do not use our website.
+              Welcome to The Wise Studio. These Terms of Service (“Terms”)
+              govern your use of our website, products, and services. By
+              accessing or using our services, you agree to comply with these
+              Terms. If you do not agree, please do not use our website.
             </p>
 
             <div>
@@ -53,24 +53,21 @@ const Page = () => {
                 </span>
 
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   By using our
-                  services, you acknowledge that you have read, understood, and
-                  agreed to these Terms. If you are using our services on behalf
-                  of a company or organization, you represent that you have the
-                  authority to bind them to these Terms.
+                  By using our services, you acknowledge that you have read,
+                  understood, and agreed to these Terms. If you are using our
+                  services on behalf of a company or organization, you represent
+                  that you have the authority to bind them to these Terms.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   We reserve the right
-                  to update, modify, or change these Terms at any time. Changes
-                  will be effective upon posting on our website. Continued use
-                  of our services after changes are posted constitutes
-                  acceptance of the updated Terms.
+                  We reserve the right to update, modify, or change these Terms
+                  at any time. Changes will be effective upon posting on our
+                  website. Continued use of our services after changes are
+                  posted constitutes acceptance of the updated Terms.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   If you do not agree
-                  to the modified Terms, you must stop using our services. We
-                  encourage you to review these Terms periodically to stay
-                  informed of any updates.
+                  If you do not agree to the modified Terms, you must stop using
+                  our services. We encourage you to review these Terms
+                  periodically to stay informed of any updates.
                 </span>
               </span>
               <span className="flex flex-col mt-4  px-4">
@@ -79,23 +76,22 @@ const Page = () => {
                 </span>
 
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   You agree to use
-                  this website only for lawful purposes. You must not attempt to
-                  gain unauthorized access to the site, its underlying code, or
-                  any systems it connects to, and you must not use the site in a
-                  way that could damage, disrupt, or overload it.
+                  You agree to use this website only for lawful purposes. You
+                  must not attempt to gain unauthorized access to the site, its
+                  underlying code, or any systems it connects to, and you must
+                  not use the site in a way that could damage, disrupt, or
+                  overload it.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   All content on this
-                  website — including case studies, project imagery, branding,
-                  and copy — is the intellectual property of Wise Studios or its
-                  clients and may not be reproduced or distributed without
-                  permission.
+                  All content on this website — including case studies, project
+                  imagery, branding, and copy — is the intellectual property of
+                  The Wise Studio or its clients and may not be reproduced or
+                  distributed without permission.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   Misuse of this
-                  website, including attempting unauthorized access or
-                  distributing harmful software, may result in legal action.
+                  Misuse of this website, including attempting unauthorized
+                  access or distributing harmful software, may result in legal
+                  action.
                 </span>
               </span>
               <span className="flex flex-col mt-4  px-4">
@@ -109,22 +105,20 @@ const Page = () => {
                     it is passive data collection from every visitor, POPIA-relevant even
                     if anonymized. Update again if PII-collecting analytics gets added. */}
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   This website uses
-                  Vercel Speed Insights to measure site performance, such as
-                  page load times. This tool does not use cookies and does not
-                  collect information that identifies you personally — it
-                  records anonymized technical data like your general location
-                  (country), device type, and browser, purely to help us keep
-                  the site fast.
+                  This website uses Vercel Speed Insights to measure site
+                  performance, such as page load times. This tool does not use
+                  cookies and does not collect information that identifies you
+                  personally — it records anonymized technical data like your
+                  general location (country), device type, and browser, purely
+                  to help us keep the site fast.
                 </span>
 
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   The “Consult” button
-                  on this website links to Google Calendar’s booking tool. If
-                  you book a consultation, the personal information you provide
-                  (such as your name, email, and meeting details) is collected
-                  directly by Google, subject to Google’s own privacy policy,
-                  not ours.
+                  The “Consult” button on this website links to Google
+                  Calendar’s booking tool. If you book a consultation, the
+                  personal information you provide (such as your name, email,
+                  and meeting details) is collected directly by Google, subject
+                  to Google’s own privacy policy, not ours.
                 </span>
               </span>
               <span className="flex flex-col mt-4  px-4">
@@ -133,26 +127,24 @@ const Page = () => {
                 </span>
 
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   We only collect
-                  personal information that you choose to send us directly — for
-                  example, when you email us at hello@wisestudios.fyi,
-                  info@wisestudios.fyi, or careers@wisestudios.fyi, or when you
-                  call us on the number listed on this site. This may include
-                  your name, contact details, and the content of your message.
+                  We only collect personal information that you choose to send
+                  us directly — for example, when you email us at
+                  hello@thewisestudio.xyz, info@thewisestudio.xyz, or
+                  careers@thewisestudio.xyz, or when you call us on the number
+                  listed on this site. This may include your name, contact
+                  details, and the content of your message.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   We use this
-                  information solely to respond to your enquiry, discuss
-                  potential work, or process a job application. We do not sell,
-                  rent, or share your personal information with third parties
-                  for marketing purposes.
+                  We use this information solely to respond to your enquiry,
+                  discuss potential work, or process a job application. We do
+                  not sell, rent, or share your personal information with third
+                  parties for marketing purposes.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   We may update our
-                  Privacy Policy from time to time and will notify users of any
-                  changes by posting the new Privacy Policy on this page. You
-                  are advised to revisit this page and review our Privacy Policy
-                  periodically for any changes.
+                  We may update our Privacy Policy from time to time and will
+                  notify users of any changes by posting the new Privacy Policy
+                  on this page. You are advised to revisit this page and review
+                  our Privacy Policy periodically for any changes.
                 </span>
               </span>
               <span className="flex flex-col mt-4  px-4">
@@ -160,7 +152,7 @@ const Page = () => {
                   5. Your rights (POPIA)
                 </span>
 
-                {/* Wise Studios is South Africa-registered, so POPIA governs this
+                {/* The Wise Studio is South Africa-registered, so POPIA governs this
                     site's data processing — not GDPR/CCPA. This section is the
                     minimum POPIA requires: named Information Officer + data
                     subject rights + Regulator complaint route. Replace the
@@ -168,22 +160,23 @@ const Page = () => {
                     designated — POPIA requires this role be filled by a real
                     person, not left as a role title. */}
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   As a South African
-                  small business, we process personal information in accordance
-                  with the Protection of Personal Information Act (POPIA). You
-                  have the right to request access to, correction of, or
-                  deletion of any personal information we hold about you, and to
-                  object to its processing.
+                  As a South African small business, we process personal
+                  information in accordance with the Protection of Personal
+                  Information Act (POPIA). You have the right to request access
+                  to, correction of, or deletion of any personal information we
+                  hold about you, and to object to its processing.
                 </span>
                 <span className="font-medium indent-8 text-sm leading-4 tracking-tight ">
                   Our Information Officer can be reached at{" "}
-                  <a href="mailto:info@wisestudios.fyi">info@wisestudios.fyi</a>{" "}
+                  <a href="mailto:info@thewisestudio.xyz">
+                    info@thewisestudio.xyz
+                  </a>{" "}
                   for any requests relating to your personal information.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   If you believe your
-                  information has been mishandled, you may lodge a complaint
-                  with the Information Regulator of South Africa at{" "}
+                  If you believe your information has been mishandled, you may
+                  lodge a complaint with the Information Regulator of South
+                  Africa at{" "}
                   <a
                     href="https://inforegulator.org.za"
                     target="_blank"
@@ -200,11 +193,10 @@ const Page = () => {
                 </span>
 
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
-                   If you have any
-                  questions about this Privacy Policy, You can contact us by
-                  email:{" "}
-                  <a href="mailto:hello@wisestudios.fyi">
-                    hello@wisestudios.fyi
+                  If you have any questions about this Privacy Policy, You can
+                  contact us by email:{" "}
+                  <a href="mailto:hello@thewisestudio.xyz">
+                    hello@thewisestudio.xyz
                   </a>
                 </span>
               </span>

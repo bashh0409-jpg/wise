@@ -6,20 +6,20 @@ import TabTitle from "../components/tab-title";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
+    "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
   openGraph: {
-    title: "About | Wise Studios",
+    title: "About | The Wise Studio",
     description:
-      "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
-    url: "https://wisestudios.fyi/about",
-    siteName: "Wise Studios",
+      "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
+    url: "https://thewisestudio.xyz/about",
+    siteName: "The Wise Studio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About | Wise Studios",
+    title: "About | The Wise Studio",
     description:
-      "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
+      "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
   },
 };
 

@@ -9,7 +9,6 @@ import Footer from "../components/Footer";
 import { getMuxPlaybackId } from "../mux";
 import Introduction from "../components/Introduction";
 
-
 const Page = () => {
   const [imageHovered, setImageHovered] = useState(false);
   const aboutVideo = getMuxPlaybackId("about");
@@ -25,15 +24,12 @@ const Page = () => {
 
   return (
     <div className="w-full scrollbar-hide bg-white">
-      <Introduction
-        videoKey="kunye"
-        description=" about Wise studios."
-      />
+      <Introduction videoKey="kunye" description=" about The Wise Studio." />
 
       <Navbar />
       <div className="mt-40 grid w-full grid-cols-1 gap-10 p-6 md:grid-cols-2">
         <h1 className="mb-4 text-3xl font-semibold tracking-tighter text-[#999] md:text-5xl">
-          About Wise Studios
+          About The Wise Studio
         </h1>
 
         <div>
@@ -70,7 +66,7 @@ const Page = () => {
           </p>
 
           <p className="indent- mt-4 text-base font-medium leading-tight tracking-tighter md:text-">
-            Wise Studios operates as a small, independent engineering studio,
+            The Wise Studio operates as a small, independent engineering studio,
             allowing us to stay close to the work and move quickly. Every
             project is approached with curiosity, technical rigor and a
             commitment to building something that can evolve with its users.
@@ -84,10 +80,10 @@ const Page = () => {
                 <span className="text-[#999]">Mail:</span>
 
                 <a
-                  href="mailto:info@wisestudios.fyi"
+                  href="mailto:info@thewisestudio.xyz"
                   className="text-black  hover:underline"
                 >
-                  info@wisestudios.fyi
+                  info@thewisestudio.xyz
                 </a>
               </div>
               <div className="flex w-full items-center -mt-1 justify-between text-sm font-semibold tracking-tight">
@@ -119,7 +115,7 @@ const Page = () => {
               >
                 <img
                   src="/images/user.avif"
-                  alt="Wise Studios"
+                  alt="The Wise Studio"
                   className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
                     imageHovered && aboutVideo ? "opacity-0" : "opacity-100"
                   }`}
@@ -149,7 +145,7 @@ const Page = () => {
                       playsInline
                       metadata={{
                         video_id: "about",
-                        video_title: "Wise Studios",
+                        video_title: "The Wise Studio",
                       }}
                       preload="metadata"
                       streamType="on-demand"
@@ -176,7 +172,7 @@ const Page = () => {
                   rel="noopener noreferrer"
                   className="flex flex-col font-semibold tracking-tighter"
                 >
-                  <span>Wise Studios</span>
+                  <span>The Wise Studio</span>
                   <span>Falcon Crescent</span>
                   <span className="mt-2">Woodlands</span>
                   <span>Pietermaritzburg</span>

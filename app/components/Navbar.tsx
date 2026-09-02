@@ -98,7 +98,6 @@ const Navbar = forwardRef<
     const items = linksContainerRef.current
       ? Array.from(linksContainerRef.current.querySelectorAll("a"))
       : [];
-
     const ctx = gsap.context(() => {
       if (sidebarOpen) {
         const tl = gsap.timeline({
@@ -307,7 +306,7 @@ const Navbar = forwardRef<
             <span className="-mt-1">South Africa, PMB</span>
           </div>
 
-          <span>©2026 Wise Studios</span>
+          <span>©2026 The Wise Studio</span>
         </div>
       </aside>
     </>

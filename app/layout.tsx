@@ -15,22 +15,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wise Studios",
+  title: "The Wise Studio",
   description:
-    "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
+    "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
   openGraph: {
-    title: "Wise Studios",
+    title: "The Wise Studio",
     description:
-      "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
-    url: "https://wisestudios.fyi",
-    siteName: "Wise Studios",
+      "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
+    url: "https://thewisestudio.xyz",
+    siteName: "The Wise Studio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wise Studios",
+    title: "The Wise Studio",
     description:
-      "Wise Studios — creative direction and design studio based in Woodlands, 3201.",
+      "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
   },
 };
 
