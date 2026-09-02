@@ -162,13 +162,13 @@ const Page = () => {
       <main className="mt-24 md:mt-40 flex flex-col p-4 md:p-4">
         <span
           onClick={() => setOverlayOpen(true)}
-          className={`fixed left-1/2 cursor-pointer z-1 -translate-x-1/2 bottom-3 flex transition-all duration-500 hover:bg-black/40 backdrop-blur-md justify-center bg-black/30 rounded-full p-1.5 px-2 text-white tracking-tighter uppercase font-mono items-center font-medium text-xs -z-1 gap-1 ${
+          className={`fixed left-1/2 cursor-pointer z-1 -translate-x-1/2 bottom-4 flex transition-all duration-500 hover:bg-black/40 backdrop-blur-md justify-center bg-black/30 rounded-full p-1.5 px-2 text-white tracking-tighter uppercase font-mono items-center font-medium text-xs -z-1 gap-1 ${
             showButton
               ? "opacity-100 translate-y-0 pointer-events-auto"
               : "opacity-0 translate-y-2 pointer-events-none"
           }`}
         >
-          Read more
+          Read story
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="18px"
