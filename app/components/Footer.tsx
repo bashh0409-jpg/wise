@@ -63,7 +63,6 @@ const Footer = () => {
   return (
     <footer className="mt-32 grid w-full min-w-0 grid-cols-1 gap-10 overflow-x-clip p-4 text-sm font-medium md:grid-cols-2">
       <div className="flex flex-col gap-2 sm:gap-6 md:flex-col">
-      
         <ContactColumn title="General Enquiries" contacts={GENERAL_CONTACTS} />
         <NewsletterSignup />
       </div>
@@ -86,19 +85,17 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="grid min-w-0 grid-cols-2 items-end tracking-tighter md:grid-cols-3">
-        <span className="font-semibold text-[#999]">
-          © Wisee. All rights reserved
-        </span>
-        <div className="flex w-full flex-col justify-between">
+      <div className="tracking-tighter">
+        <div className="flex w-full flex-co justify-between">
           <a
             href="/legal"
             className="flex w-full justify-between font-semibold hover:text-blue-500 hover:underline"
           >
             Legal Notice
           </a>
-          <span className="break-all text-[#999]">
-            (Pty) Ltd Reg No: 2026/______/07
+         
+          <span className="font-semibold w-full text-[#999]">
+            © Wisee. All rights reserved
           </span>
         </div>
       </div>
