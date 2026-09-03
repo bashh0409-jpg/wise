@@ -183,7 +183,7 @@ const Page = () => {
         <h1 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter font-semibold max-w-full md:max-w-[60%] leading-tight md:leading-12 mb-4 md:mb-6">
           {project.title}
         </h1>
-        <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter font-semibold max-w-full md:max-w-[60%] leading-tight md:leading-12 text-[#999]">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter font-semibold max-w-full md:max-w-[60%] leading-6 md:leading-11 text-[#999]">
           {project.description}
         </h2>
 
