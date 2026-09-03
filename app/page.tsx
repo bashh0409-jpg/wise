@@ -84,7 +84,7 @@ const ProjectCard = ({
       <SplitScramble
         ref={descriptionRef}
         text={project.description}
-        className="mt-0.5 font-semibold tracking-tighter  block w-full leading-4"
+        className="mt-0.5 line-clamp-2 max-h-8 block w-full font-semibold leading-4 tracking-tighter"
       />
       <span className="mt-2 flex flex-col">
         <span className=" font-semibold tracking-tighter ">
