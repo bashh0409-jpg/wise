@@ -20,7 +20,10 @@ const CookieConsent = ({ onConsent }: CookieConsentProps) => {
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (!stored) setVisible(true);
+    if (stored) return;
+
+    const frame = window.requestAnimationFrame(() => setVisible(true));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -66,27 +69,26 @@ const CookieConsent = ({ onConsent }: CookieConsentProps) => {
       // left-1/2 + -translate-x-1/2 centers a fixed, auto-width element;
       // mx-auto alone has no effect here since a fixed element isn't
       // constrained by its parent's block width.
-      className="fixed bottom-11 left-1/2 z-50 w-max -translate-x-1/2 items-center justify-center rounded-full bg-[#999] p-1 pl-2"
+      className="fixed bottom-4 left-1/2 z-50 w-[calc(100%-2rem)] -translate-x-1/2 items-center justify-center rounded-2xl bg-[#999] p-2 sm:bottom-11 sm:w-max sm:rounded-full sm:p-1 sm:pl-2"
     >
-      <div className="mx-auto flex items-center justify-between gap-4">
-        <span className="text-sm font-medium text-white leading-4 tracking-tight">
+      <div className="mx-auto flex flex-col items-stretch justify-between gap-2 sm:flex-row sm:items-center sm:gap-4">
+        <span className="text-center text-sm font-medium leading-4 tracking-tight text-white sm:text-left">
           This site uses cookies. See{" "}
           <a href="/legal" className="cursor-pointer underline">
             Legal
           </a>{" "}
           for more info.
         </span>
-        <div className="flex shrink-0 gap-3">
-          <button
+        <button
             type="button"
             onClick={() => handleChoice("accepted")}
-            className="cursor-pointer rounded-full bg-neutral-100 px-4 py-1 text-sm font-medium text-neutral-950 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100"
+          className="w-full cursor-pointer rounded-full bg-neutral-100 px-4 py-1 text-sm font-medium text-neutral-950 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100 sm:w-auto"
           >
             <span className="text-sm font-medium leading-4 tracking-tight">
               Accept
             </span>
           </button>
-        </div>
+
       </div>
     </div>
   );

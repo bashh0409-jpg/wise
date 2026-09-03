@@ -314,7 +314,7 @@ export const projects: ProjectDetail[] = [
       "A sturdy old-style serif brings the voice of a printed menu, paired with a practical sans for reservations, menus, and service information.",
     deliverables: "Brand Identity, Interior Graphics, Menu System",
     client: "Hearth",
-    visit: "https://hearth.cyi",
+    visit: "https://hearth.fyi",
   },
   {
     id: "Dua",
