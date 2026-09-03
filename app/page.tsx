@@ -48,6 +48,22 @@ const ProjectCard = ({
   const titleRef = useRef<SplitScrambleHandle>(null);
   const descriptionRef = useRef<SplitScrambleHandle>(null);
 
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 639px)").matches || !cardRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) onHover(project);
+      },
+      { rootMargin: "-49% 0px -49% 0px", threshold: 0 },
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [onHover, project]);
+
   const animateText = (color: string) => {
     titleRef.current?.scramble();
     descriptionRef.current?.scramble();
@@ -272,7 +288,7 @@ const Page = () => {
           key={layer.id}
           data-background
           onTransitionEnd={() => handleLayerTransitionEnd(layer.id)}
-          className={`absolute inset-0 overflow-hidden transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
+          className={`fixed inset-0 overflow-hidden transition-opacity duration-600 ease-in-out ${layer.visible ? "opacity-100" : "opacity-0"}`}
         >
           {layer.playbackId ? (
             <MuxVideo
@@ -303,12 +319,12 @@ const Page = () => {
 
       <Navbar
         ref={headerRef}
-        className="relative z-50"
+        className="z-50"
         currentTime={southAfricaTime}
       />
       <div
         ref={projectsRef}
-        className="relative z-20 grid w-full grid-cols-1 gap-6 px-4 pb-8 pt-16 text-white sm:absolute sm:inset-0 sm:grid-cols-2 sm:content-center sm:gap-8 sm:py-20 md:grid-cols-3 lg:grid-cols-5 lg:gap-2"
+        className="relative z-20 grid w-full grid-cols-1 gap-6 px-4 pb-[50vh] pt-[45vh] text-white sm:absolute sm:inset-0 sm:grid-cols-2 sm:content-center sm:gap-8 sm:py-20 md:grid-cols-3 lg:grid-cols-5 lg:gap-2"
       >
         {featuredProjects.map((project) => (
           <ProjectCard
