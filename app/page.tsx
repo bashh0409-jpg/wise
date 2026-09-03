@@ -317,11 +317,7 @@ const Page = () => {
       ))}
       <div className="absolute inset-0 z-10 bg-black/30" />
 
-      <Navbar
-        ref={headerRef}
-        className="z-50"
-        currentTime={southAfricaTime}
-      />
+      <Navbar ref={headerRef} className="z-50" currentTime={southAfricaTime} />
       <div
         ref={projectsRef}
         className="relative z-20 grid w-full grid-cols-1 gap-6 px-4 pb-[50vh] pt-[45vh] text-white sm:absolute sm:inset-0 sm:grid-cols-2 sm:content-center sm:gap-8 sm:py-20 md:grid-cols-3 lg:grid-cols-5 lg:gap-2"

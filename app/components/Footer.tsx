@@ -12,18 +12,7 @@ interface SocialLink {
   href: string;
 }
 
-const BUSINESS_CONTACTS: ContactLink[] = [
-  {
-    label: "Business",
-    value: "hello@thewisestudio.xyz",
-    href: "mailto:hello@thewisestudio.xyz",
-  },
-  {
-    label: "Careers",
-    value: "careers@thewisestudio.xyz",
-    href: "mailto:careers@thewisestudio.xyz",
-  },
-];
+
 
 const GENERAL_CONTACTS: ContactLink[] = [
   { label: "Tel", value: "+27 (81) 590-9191", href: "tel:+27815909191" },
@@ -52,17 +41,17 @@ const ContactColumn = ({
   title: string;
   contacts: ContactLink[];
 }) => (
-  <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
+  <div className="grid min-w-0 grid-cols-2 tracking-tighter md:grid-cols-3">
     <span className="text-[#999] font-semibold">{title}</span>
-    <ul className="flex w-full flex-col justify-between">
+    <ul className="flex min-w-0 w-full flex-col justify-between">
       {contacts.map((contact) => (
         <li key={contact.label} className="font-semibold">
           <a
             href={contact.href}
-            className="flex w-full  justify-between hover:underline"
+            className="flex min-w-0 w-full flex-wrap justify-between break-words hover:underline"
           >
             <span className="text-[#999]">{contact.label}: </span>
-            {contact.value}
+            <span className="break-all">{contact.value}</span>
           </a>
         </li>
       ))}
@@ -72,19 +61,16 @@ const ContactColumn = ({
 
 const Footer = () => {
   return (
-    <footer className="mt-32 grid w-full grid-cols-1 gap-10 p-4 text-sm font-medium md:grid-cols-2">
+    <footer className="mt-32 grid w-full min-w-0 grid-cols-1 gap-10 overflow-x-clip p-4 text-sm font-medium md:grid-cols-2">
       <div className="flex flex-col gap-2 sm:gap-6 md:flex-col">
-        <ContactColumn
-          title="Business Enquiries"
-          contacts={BUSINESS_CONTACTS}
-        />
+      
         <ContactColumn title="General Enquiries" contacts={GENERAL_CONTACTS} />
         <NewsletterSignup />
       </div>
 
-      <div className="grid grid-cols-2 items-end tracking-tighter md:grid-cols-3">
+      <div className="grid min-w-0 grid-cols-2 items-end tracking-tighter md:grid-cols-3">
         <span className="font-semibold text-[#999]">Socials</span>
-        <ul className="flex w-full gap-4">
+        <ul className="flex min-w-0 w-full flex-wrap gap-x-4 gap-y-1">
           {SOCIALS.map((social) => (
             <li key={social.label}>
               <a
@@ -100,7 +86,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="grid grid-cols-2 items-end tracking-tighter md:grid-cols-3">
+      <div className="grid min-w-0 grid-cols-2 items-end tracking-tighter md:grid-cols-3">
         <span className="font-semibold text-[#999]">
           © Wisee. All rights reserved
         </span>
@@ -111,7 +97,9 @@ const Footer = () => {
           >
             Legal Notice
           </a>
-          <span className="text-[#999]">(Pty) Ltd Reg No: 2026/______/07</span>
+          <span className="break-all text-[#999]">
+            (Pty) Ltd Reg No: 2026/______/07
+          </span>
         </div>
       </div>
     </footer>
