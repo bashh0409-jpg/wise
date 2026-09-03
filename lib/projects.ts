@@ -1,5 +1,9 @@
 import { getMuxPlaybackId } from "@/app/mux";
 
+export type ProjectMedia =
+  | { type: "image"; src: string; alt: string }
+  | { type: "video"; src: string; alt: string };
+
 export type ProjectDetail = {
   id: string;
   title: string;
@@ -16,6 +20,8 @@ export type ProjectDetail = {
   image?: string;
   /** Public Mux playback ID. */
   video?: string;
+  /** Additional project media. The existing image and video fields remain the hero media. */
+  media: ProjectMedia[];
   /** Additional gallery images shown below the hero. Length drives the grid layout — leave empty/undefined to show hero only. */
   gallery?: string[];
   alt: string;
@@ -28,6 +34,14 @@ export const projects: ProjectDetail[] = [
     description: "A tactile skincare brand built around body confidence",
     category: "Fashion & Beauty",
     image: "/images/melabody.avif",
+    media: [
+      { type: "image", src: "/images/melabody.avif", alt: "Melabody skincare" },
+      {
+        type: "image",
+        src: "/images/ilia.avif",
+        alt: "Skincare product detail",
+      },
+    ],
     alt: "Orbit project",
     status: "Ongoing",
     year: "2026",
@@ -48,6 +62,18 @@ export const projects: ProjectDetail[] = [
       "A soft, sensorial skincare world for an everyday beauty ritual",
     category: "Fashion & Beauty",
     video: getMuxPlaybackId("rhode"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("rhode"),
+        alt: "Rhode skincare film",
+      },
+      {
+        type: "image",
+        src: "/images/melabody.avif",
+        alt: "Skincare product detail",
+      },
+    ],
     alt: "Still Life project",
     status: "Ongoing",
     year: "2026",
@@ -68,6 +94,14 @@ export const projects: ProjectDetail[] = [
       "A warm cafe brand bringing familiar South African comfort food to more towns",
     category: "Food & Drinks",
     image: "/images/Beano.avif",
+    media: [
+      { type: "image", src: "/images/Beano.avif", alt: "Beano's Cafe" },
+      {
+        type: "image",
+        src: "/images/itsokay.avif",
+        alt: "Cafe lifestyle detail",
+      },
+    ],
     alt: "Luma project",
     status: "Ongoing",
     year: "2026",
@@ -89,6 +123,14 @@ export const projects: ProjectDetail[] = [
       "A performance cycling identity connecting riders, clubs, and kit",
     category: "Sport & Cycling",
     image: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
+    media: [
+      {
+        type: "image",
+        src: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
+        alt: "Redline cycling",
+      },
+      { type: "image", src: "/images/echelon.avif", alt: "Cycling detail" },
+    ],
     alt: "Common Thread project",
     status: "Coming soon",
     year: "S 2026",
@@ -109,6 +151,14 @@ export const projects: ProjectDetail[] = [
       "A calm training platform for people building sustainable fitness habits",
     category: "Fitness",
     video: getMuxPlaybackId("unna"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("unna"),
+        alt: "Unna training film",
+      },
+      { type: "image", src: "/images/echelon.avif", alt: "Training detail" },
+    ],
     alt: "Onda project",
     status: "Coming soon",
     year: "S 2027",
@@ -129,6 +179,14 @@ export const projects: ProjectDetail[] = [
       "A clear financial identity for a modern savings and lending platform",
     category: "Finance",
     image: "/images/talow.avif",
+    media: [
+      { type: "image", src: "/images/talow.avif", alt: "Tallow finance" },
+      {
+        type: "image",
+        src: "/images/ilia.avif",
+        alt: "Financial product detail",
+      },
+    ],
     alt: "Moya House project",
     status: "Complete",
     year: "2026",
@@ -148,6 +206,14 @@ export const projects: ProjectDetail[] = [
     description: "A clean, botanical skincare system for sensitive skin",
     category: "Beauty",
     image: "/images/ilia.avif",
+    media: [
+      { type: "image", src: "/images/ilia.avif", alt: "Ilia skincare" },
+      {
+        type: "image",
+        src: "/images/melabody.avif",
+        alt: "Skincare packaging detail",
+      },
+    ],
     alt: "Luma project",
     status: "Complete",
     year: "2026",
@@ -169,6 +235,18 @@ export const projects: ProjectDetail[] = [
     category: "Finance",
     image: "/K1z8mV8TAFVjZBpOYWvGpV130Kw.avif",
     video: getMuxPlaybackId("vanta"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("vanta"),
+        alt: "Vanta banking film",
+      },
+      {
+        type: "image",
+        src: "/K1z8mV8TAFVjZBpOYWvGpV130Kw.avif",
+        alt: "Vanta product detail",
+      },
+    ],
     alt: "Aster project",
     status: "Complete",
     year: "2025",
@@ -189,6 +267,14 @@ export const projects: ProjectDetail[] = [
       "A global sports campaign turning everyday effort into momentum",
     category: "Sports",
     image: "/images/jdi.avif",
+    media: [
+      { type: "image", src: "/images/jdi.avif", alt: "Just Do It campaign" },
+      {
+        type: "image",
+        src: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
+        alt: "Athlete detail",
+      },
+    ],
     alt: "Just Do It project",
     status: "Complete",
     year: "2025",
@@ -209,6 +295,14 @@ export const projects: ProjectDetail[] = [
       "A grounded hospitality brand built around shared meals and slow living",
     category: "Food & Drinks",
     image: "/images/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
+    media: [
+      {
+        type: "image",
+        src: "/images/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
+        alt: "Hearth hospitality",
+      },
+      { type: "image", src: "/images/Beano.avif", alt: "Shared meal detail" },
+    ],
     alt: "Hearth project",
     status: "Complete",
     year: "2025",
@@ -230,6 +324,10 @@ export const projects: ProjectDetail[] = [
     category: "Fashion & Beauty",
     image: "/gylain-omer-SEHB67NK4Wg-unsplash.avif",
     video: getMuxPlaybackId("dua"),
+    media: [
+      { type: "video", src: getMuxPlaybackId("dua"), alt: "Dua fashion film" },
+      { type: "image", src: "/images/fur.avif", alt: "Fashion detail" },
+    ],
     alt: "Cinder project",
     status: "Complete",
     year: "2024",
@@ -250,6 +348,10 @@ export const projects: ProjectDetail[] = [
       "A tactile personal-care label with an unapologetically playful voice",
     category: "Fashion & Beauty",
     image: "/images/fur.avif",
+    media: [
+      { type: "image", src: "/images/fur.avif", alt: "Fur personal care" },
+      { type: "image", src: "/images/ilia.avif", alt: "Product detail" },
+    ],
     alt: "Fur project",
     status: "Complete",
     year: "2024",
@@ -270,6 +372,14 @@ export const projects: ProjectDetail[] = [
       "A travel journal documenting places through food, people, and detours",
     category: "Travel",
     image: "/images/itsokay.avif",
+    media: [
+      {
+        type: "image",
+        src: "/images/itsokay.avif",
+        alt: "It's Okay travel journal",
+      },
+      { type: "image", src: "/images/Beano.avif", alt: "Travel food detail" },
+    ],
     alt: "Afterglow project",
     status: "Complete",
     year: "2023",
@@ -290,6 +400,18 @@ export const projects: ProjectDetail[] = [
       "An accessible learning platform for creative and cultural studies",
     category: "Education",
     video: getMuxPlaybackId("ccus"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("ccus"),
+        alt: "ccus education film",
+      },
+      {
+        type: "image",
+        src: "/images/talow.avif",
+        alt: "Course material detail",
+      },
+    ],
     alt: "Afterglow project",
     status: "Complete",
     year: "2023",
@@ -309,6 +431,14 @@ export const projects: ProjectDetail[] = [
     description: "A data-led cycling brand for riders who train with intention",
     category: "Sport",
     image: "/images/echelon.avif",
+    media: [
+      { type: "image", src: "/images/echelon.avif", alt: "Echelon cycling" },
+      {
+        type: "image",
+        src: "/markus-spiske-HYUXBWVyh14-unsplash.avif",
+        alt: "Cycling performance detail",
+      },
+    ],
     alt: "Echelon project",
     status: "Complete",
     year: "2023",
@@ -329,6 +459,18 @@ export const projects: ProjectDetail[] = [
     category: "Sport & Cars",
     image: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
     video: getMuxPlaybackId("porsce911"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("porsce911"),
+        alt: "Porsche 911 film",
+      },
+      {
+        type: "image",
+        src: "/suvI3NLr8X1VCgPDJ5pLgxWxU.avif",
+        alt: "Automotive detail",
+      },
+    ],
     alt: "Luma project",
     status: "Concept",
     year: "2026",
@@ -349,6 +491,18 @@ export const projects: ProjectDetail[] = [
       "A transparent product story for next-generation wireless audio",
     category: "Technology",
     video: getMuxPlaybackId("nothingEar3"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("nothingEar3"),
+        alt: "Nothing Ear 3 product film",
+      },
+      {
+        type: "image",
+        src: "/K1z8mV8TAFVjZBpOYWvGpV130Kw.avif",
+        alt: "Audio product detail",
+      },
+    ],
     alt: "Still Life project",
     status: "Concept",
     year: "2025",
@@ -369,6 +523,14 @@ export const projects: ProjectDetail[] = [
       "A live music platform built around sound, movement, and community",
     category: "Entertainment",
     video: getMuxPlaybackId("kunye"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("kunye"),
+        alt: "Kunye live music film",
+      },
+      { type: "image", src: "/images/itsokay.avif", alt: "Live event detail" },
+    ],
     alt: "Still Life project",
     status: "Concept",
     year: "2025",
@@ -388,6 +550,14 @@ export const projects: ProjectDetail[] = [
     description: "A private members club for culture, conversation, and access",
     category: "Entertainment",
     video: getMuxPlaybackId("honorable"),
+    media: [
+      {
+        type: "video",
+        src: getMuxPlaybackId("honorable"),
+        alt: "Honorable members club film",
+      },
+      { type: "image", src: "/images/talow.avif", alt: "Members club detail" },
+    ],
     alt: "Still Life project",
     status: "Concept",
     year: "2025",

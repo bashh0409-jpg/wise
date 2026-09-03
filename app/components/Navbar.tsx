@@ -193,7 +193,7 @@ const Navbar = forwardRef<
         className={`fixed left-0 top-0 z-20 flex w-full items-center justify-between p-4 font-medium tracking-tight mix-blend-difference ${className}`}
       >
         <Link href="/" className="font-bold italic tracking-tighter text-white">
-          WISE
+        TheWiseStudio
         </Link>
 
         <span className="w-[6rem] whitespace-nowrap text-right tabular-nums tracking-tighter text-white">
@@ -260,7 +260,7 @@ const Navbar = forwardRef<
         }`}
       >
         <div className="flex items-center justify-between">
-          <span className="font-bold italic tracking-tighter">WISE</span>
+          <span className="font-bold italic tracking-tighter">TheWiseStudio</span>
 
           <button
             type="button"

@@ -112,8 +112,8 @@ const Page = () => {
           }}
           className={
             statusFilter === "All"
-              ? "text-black flex cursor-pointer items-center gap-1 text-2xl font-bold tracking-tighter text-black"
-              : "hover:text-black flex cursor-pointer items-center gap-1 text-2xl font-bold tracking-tighter text-[#999]"
+              ? "text-black flex cursor-pointer transition-colors duration-500 items-center gap-1 text-2xl font-bold tracking-tighter text-black"
+              : "hover:text-black flex transition-colors duration-500 cursor-pointer items-center gap-1 text-2xl font-bold tracking-tighter text-[#999]"
           }
         >
           <span aria-hidden="true">

@@ -72,6 +72,7 @@ const WorkProjectCard = (project: WorkProject) => {
         viewBox="0 -960 960 960"
         width="20px"
         fill="#000"
+        
       >
         <path d="M260-260v-220h52v168h168v52H260Zm388-220v-168H480v-52h220v220h-52Z" />
       </svg>
@@ -143,7 +144,7 @@ const WorkProjectCard = (project: WorkProject) => {
 
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-200 group-hover:bg-white/[0.22]"
+            className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-white/[0.22]"
           />
         </div>
 
