@@ -39,7 +39,7 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 tracking-tighter md:grid-cols-3">
+    <div className="grid  tracking-tighter md:grid-cols-3">
       <span className="font-semibold text-[#999]">Newsletter</span>
       <div className="col-span-1">
         {state === "success" ? (

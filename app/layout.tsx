@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "The Wise Studio",
   description:
     "The Wise Studio — creative direction and design studio based in Woodlands, 3201.",
+  other: {
+    "google-adsense-account": "ca-pub-8778681612531498",
+  },
   openGraph: {
     title: "The Wise Studio",
     description:
@@ -25,6 +28,7 @@ export const metadata: Metadata = {
     url: "https://thewisestudio.xyz",
     siteName: "The Wise Studio",
     type: "website",
+    
   },
   twitter: {
     card: "summary_large_image",

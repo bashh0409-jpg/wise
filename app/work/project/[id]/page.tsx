@@ -233,94 +233,84 @@ const Page = () => {
             </div>
           </div>
 
-          <div
-            ref={firstRectRef}
-            className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2"
-          >
-            {firstMedia}
-          </div>
-          <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
-            {project.image ? (
-              <Image
-                src={project.image}
-                alt={project.alt}
-                fill
-                sizes="(min-width: 768px) 75vw, 100vw"
-                className="object-cover"
-              />
-            ) : (
-              <div className="h-full w-full bg-black/6" />
-            )}
-          </div>
-          <div className="grid gap-2 grid-cols-2">
-            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
-              {project.image ? (
+          {(() => {
+            const renderMedia = (item: ProjectMedia, sizes: string) => {
+              if (item.type === "video") {
+                // Assumes @mux/mux-player-react is already used for firstMedia/hero video —
+                // swap this for whatever player component your project actually uses.
+                return (
+                  <MuxVideo
+                    streamType="on-demand"
+                    playbackId={item.src}
+                    className="h-full w-full object-cover"
+                    autoPlay="muted"
+                    loop
+                    muted
+                  />
+                );
+              }
+              return (
                 <Image
-                  src={project.image}
-                  alt={project.alt}
+                  src={item.src}
+                  alt={item.alt}
                   fill
-                  sizes="(min-width: 768px) 35vw, 100vw"
+                  sizes={sizes}
                   className="object-cover"
                 />
-              ) : (
-                <div className="h-full w-full bg-black/10" />
-              )}
-            </div>
-            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="(min-width: 768px) 35vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="h-full w-full bg-black/10" />
-              )}
-            </div>
-          </div>
-          <div className="relative w-full overflow-hidden bg-black/6 aspect-video mb-2">
-            {project.image ? (
-              <Image
-                src={project.image}
-                alt={project.alt}
-                fill
-                sizes="(min-width: 768px) 75vw, 100vw"
-                className="object-cover"
-              />
-            ) : (
-              <div className="h-full w-full bg-black/10" />
-            )}
-          </div>
-          <div className="grid gap-2 grid-cols-2">
-            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="(min-width: 768px) 35vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="h-full w-full bg-black/10" />
-              )}
-            </div>
-            <div className="relative w-full overflow-hidden  bg-black/6 aspect-video mb-2">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="(min-width: 768px) 35vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="h-full w-full bg-black/6" />
-              )}
-            </div>
-          </div>
+              );
+            };
+
+            const sizes = "(min-width: 640px) 33vw, 100vw";
+            const [, m1, m2, m3, m4, m5] = project.media; // index 0 is the hero, rendered as firstMedia
+
+            return (
+              <div className="mt-10 grid h-screen grid-cols-1 grid-rows-none gap-2 sm:mt-20 sm:grid-cols-6 sm:grid-rows-8">
+                <div className="relative w-full overflow-hidden bg-black/6 sm:col-span-2 sm:row-span-4">
+                  {firstMedia}
+                </div>
+
+                <div className="relative w-full overflow-hidden bg-black/6 sm:col-span-2 sm:col-start-3 sm:row-span-3">
+                  {m1 ? (
+                    renderMedia(m1, sizes)
+                  ) : (
+                    <div className="h-full w-full bg-black/6" />
+                  )}
+                </div>
+
+                <div className="relative w-full overflow-hidden bg-black/6 sm:col-span-2 sm:col-start-3 sm:row-span-5 sm:row-start-4">
+                  {m2 ? (
+                    renderMedia(m2, sizes)
+                  ) : (
+                    <div className="h-full w-full bg-black/10" />
+                  )}
+                </div>
+
+                <div className="relative w-full overflow-hidden bg-black/6 sm:col-span-2 sm:col-start-1 sm:row-span-4 sm:row-start-5">
+                  {m3 ? (
+                    renderMedia(m3, sizes)
+                  ) : (
+                    <div className="h-full w-full bg-black/6" />
+                  )}
+                </div>
+
+                <div className="relative w-full overflow-hidden bg-black/6 sm:col-span-2 sm:col-start-5 sm:row-span-5 sm:row-start-1">
+                  {m4 ? (
+                    renderMedia(m4, sizes)
+                  ) : (
+                    <div className="h-full w-full bg-black/10" />
+                  )}
+                </div>
+
+                <div className="relative w-full overflow-hidden bg-black/6 sm:col-span-2 sm:col-start-5 sm:row-span-3 sm:row-start-6">
+                  {m5 ? (
+                    renderMedia(m5, sizes)
+                  ) : (
+                    <div className="h-full w-full bg-black/6" />
+                  )}
+                </div>
+              </div>
+            );
+          })()}
 
           <div ref={endMarkerRef} className="h-px w-full" />
 

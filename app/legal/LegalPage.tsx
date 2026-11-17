@@ -128,11 +128,16 @@ const Page = () => {
 
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
                   We only collect personal information that you choose to send
-                  us directly — for example, when you email us at
-                  hello@thewisestudio.xyz, info@thewisestudio.xyz, or
-                  careers@thewisestudio.xyz, or when you call us on the number
-                  listed on this site. This may include your name, contact
-                  details, and the content of your message.
+                  us directly — for example, when you email us at{" "}
+                  <a
+                    className="text-blue-500 underline"
+                    href="mailto:info@thewisestudio.xyz"
+                  >
+                    info@thewisestudio.xyz
+                  </a>
+                  , when you call us on the number listed on this site. This may
+                  include your name, contact details, and the content of your
+                  message.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
                   We use this information solely to respond to your enquiry,
@@ -168,10 +173,13 @@ const Page = () => {
                 </span>
                 <span className="font-medium indent-8 text-sm leading-4 tracking-tight ">
                   Our Information Officer can be reached at{" "}
-                  <a href="mailto:info@thewisestudio.xyz">
+                  <a
+                    className="text-blue-500 underline"
+                    href="mailto:info@thewisestudio.xyz"
+                  >
                     info@thewisestudio.xyz
-                  </a>{" "}
-                  for any requests relating to your personal information.
+                  </a>
+                  , for any requests relating to your personal information.
                 </span>
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
                   If you believe your information has been mishandled, you may
@@ -181,6 +189,8 @@ const Page = () => {
                     href="https://inforegulator.org.za"
                     target="_blank"
                     rel="noopener noreferrer"
+                  
+                    className="text-blue-500 underline"
                   >
                     inforegulator.org.za
                   </a>
@@ -195,9 +205,13 @@ const Page = () => {
                 <span className="indent-8 font-medium text-sm leading-4 tracking-tight ">
                   If you have any questions about this Privacy Policy, You can
                   contact us by email:{" "}
-                  <a href="mailto:hello@thewisestudio.xyz">
-                    hello@thewisestudio.xyz
+                  <a
+                    className="text-blue-500 underline"
+                    href="mailto:info@thewisestudio.xyz"
+                  >
+                    info@thewisestudio.xyz
                   </a>
+                  
                 </span>
               </span>
             </div>

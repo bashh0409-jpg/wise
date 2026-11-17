@@ -80,19 +80,17 @@ const CookieConsent = ({ onConsent }: CookieConsentProps) => {
           for more info.
         </span>
         <button
-            type="button"
-            onClick={() => handleChoice("accepted")}
+          type="button"
+          onClick={() => handleChoice("accepted")}
           className="w-full cursor-pointer rounded-full bg-neutral-100 px-4 py-1 text-sm font-medium text-neutral-950 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-100 sm:w-auto"
-          >
-            <span className="text-sm font-medium leading-4 tracking-tight">
-              Accept
-            </span>
-          </button>
-
+        >
+          <span className="text-sm font-medium leading-4 tracking-tight">
+            Accept
+          </span>
+        </button>
       </div>
     </div>
   );
 };
 
 export default CookieConsent;
-
