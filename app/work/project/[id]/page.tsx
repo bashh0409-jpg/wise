@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import MuxVideo from "@mux/mux-video-react";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import { getProjectById, projects } from "@/lib/projects";
+import { getProjectById, projects, type ProjectMedia } from "@/lib/projects";
 
 const Page = () => {
   const params = useParams<{ id: string }>();
